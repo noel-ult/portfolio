@@ -1,0 +1,35 @@
+{
+  "title": "ETLab+",
+  "slug": "etlab-plus",
+  "tagline": "A multi-tenant college laboratory management platform with role-based access control and database isolation.",
+  "description": "Built to eliminate paper-based lab sign-in sheets at Sahrdaya College of Engineering and give department heads real-time lab utilization analytics.",
+  "featured": true,
+  "status": "Completed",
+  "year": "2025",
+  "category": "Full Stack",
+  "github": "https://github.com/Ultra2021",
+  "demo": "https://noelbiju.com/projects/etlab-plus",
+  "coverImage": "projects/etlab-plus.jpg",
+  "screenshots": [
+    {
+      "title": "Faculty Attendance Console",
+      "caption": "Real-time laboratory seat occupancy matrix",
+      "type": "code"
+    },
+    {
+      "title": "PostgreSQL Query Plan",
+      "caption": "Indexed query execution under 4ms for 10,000+ attendance logs",
+      "type": "terminal"
+    }
+  ],
+  "technologies": ["Full Stack", "PostgreSQL", "Next.js", "TypeScript", "Node.js", "TailwindCSS"],
+  "architecture": ["Next.js Client -> Node.js REST API -> PostgreSQL Row-Level Security"],
+  "database": ["PostgreSQL database containing normalized tables for students, faculty, labs, schedules, and reservations linked via Foreign Key constraints."],
+  "apiEndpoints": ["POST /api/auth/login", "GET /api/labs/attendance", "POST /api/reservations"],
+  "folderStructure": ["etlab-plus/\n├── server/\n│   ├── src/routes/attendance.ts\n│   ├── src/db/schema.sql (PostgreSQL RLS policies)\n│   └── src/middleware/auth.ts\n├── client/\n│   └── app/dashboard/page.tsx\n└── README.md"],
+  "timeline": ["Jan 2025: PostgreSQL RLS policy design", "March 2025: Awarded Best S3 Project"],
+  "challenges": ["Preventing concurrent equipment double-booking during peak lab registration hours while maintaining instant query responses."],
+  "lessons": ["Enforcing relational constraints at the database engine level prevents application-tier race conditions."],
+  "futureImprovements": ["Add RFID / QR code scanner integration for contactless physical lab entry."],
+  "relatedProjects": ["rymeds", "local-ai-assistant"]
+}

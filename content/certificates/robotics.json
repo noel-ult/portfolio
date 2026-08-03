@@ -1,0 +1,11 @@
+{
+  "title": "Embedded Robotics & Control Systems",
+  "issuer": "Luminar Technolab",
+  "category": "Robotics & Hardware Systems",
+  "issueDate": "Feb 2026",
+  "credentialId": "LUM-ROB-2026-781",
+  "verificationUrl": "https://luminartechnolab.com/verify/LUM-ROB-2026-781",
+  "image": "certificates/robotics.jpg",
+  "description": "Microcontroller interfacing, motor driver PWM control, HC-05 wireless serial communication, and ultrasonic obstacle avoidance.",
+  "featured": false
+}

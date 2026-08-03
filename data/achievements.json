@@ -1,0 +1,58 @@
+[
+  {
+    "id": "best-s1-project",
+    "title": "Best S1 Project — RyMeds",
+    "project": "RyMeds",
+    "story": "RyMeds started as a first semester project. Most people in my class were building to-do apps. I wanted to build something that could actually run in a pharmacy — inventory, billing, stock alerts. It won Best S1 Project, mostly because it focused on solving one real problem instead of showing off every feature I knew. The judges liked that it had proper database transactions and could handle concurrent sales without breaking stock counts.",
+    "year": 2025,
+    "type": "award",
+    "icon": "🏆",
+    "category": "Academic Award"
+  },
+  {
+    "id": "best-s3-project",
+    "title": "Best S3 Project — ETLab+",
+    "project": "ETLab+",
+    "story": "ETLab+ came from frustration. Our college lab scheduling was done on paper, and submissions were emailed around. I built a multi-role system with row-level security in PostgreSQL — students submit work, instructors grade, admins manage schedules. It won Best S3 Project. The hardest part wasn't the code, it was getting the access control policies right so each role only sees what they should.",
+    "year": 2025,
+    "type": "award",
+    "icon": "🏆",
+    "category": "Academic Award"
+  },
+  {
+    "id": "tinkerhub-scholarship",
+    "title": "TinkerHub Scholarship",
+    "story": "Got selected for the TinkerHub Scholarship in 2025. TinkerHub is a student-run tech community in Kerala. The scholarship was for people contributing to open tech learning. It wasn't a huge amount of money, but it meant someone noticed the work I was putting into learning and sharing.",
+    "year": 2025,
+    "type": "scholarship",
+    "icon": "🎓",
+    "category": "Community"
+  },
+  {
+    "id": "wadhwani-ignite-india",
+    "title": "Wadhwani Foundation — Ignite India",
+    "story": "Completed the Wadhwani Foundation's entrepreneurship program. Learned about product ideation, business modeling, and market validation. The most useful takeaway wasn't about startups — it was learning to think about who actually uses the software and whether they'd pay for it. That thinking now influences how I scope every project.",
+    "year": 2025,
+    "type": "program",
+    "icon": "💡",
+    "category": "Entrepreneurship"
+  },
+  {
+    "id": "beach-hack-season-7",
+    "title": "Beach Hack Season 7",
+    "story": "Participated in Beach Hack Season 7 — a hackathon where you build under time pressure. The experience taught me more about prioritization than any course. When you only have 24 hours, you learn to cut scope ruthlessly and ship something that works. We didn't win, but the codebase I wrote that night was cleaner than some of my semester projects.",
+    "year": 2025,
+    "type": "hackathon",
+    "icon": "⚡",
+    "category": "Hackathon"
+  },
+  {
+    "id": "ieee-xplore-training",
+    "title": "IEEE Xplore Research Training",
+    "story": "Completed research training through IEEE and EBSCO. Learned how to search academic databases properly, evaluate papers, and understand publishing standards. Before this, I'd just Google things. Now I actually read papers when I want to understand how something works under the hood.",
+    "year": 2025,
+    "type": "training",
+    "icon": "📜",
+    "category": "Research"
+  }
+]

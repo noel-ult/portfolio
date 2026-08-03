@@ -1,0 +1,64 @@
+{
+  "languages": [
+    { "name": "C", "projectSlug": "robotics-internship" },
+    { "name": "C++", "projectSlug": "robotics-internship" },
+    { "name": "Python", "projectSlug": "local-ai-assistant" },
+    { "name": "TypeScript", "projectSlug": "etlab-plus" },
+    { "name": "JavaScript", "projectSlug": "rymeds" },
+    { "name": "SQL", "projectSlug": "rymeds" },
+    { "name": "PL/SQL", "projectSlug": "etlab-plus" },
+    { "name": "HTML", "projectSlug": "etlab-plus" },
+    { "name": "CSS", "projectSlug": "ai-study-coach" }
+  ],
+  "frameworks": [
+    { "name": "FastAPI", "projectSlug": "local-ai-assistant" },
+    { "name": "Express.js", "projectSlug": "rymeds" },
+    { "name": "React", "projectSlug": "ai-study-coach" },
+    { "name": "Next.js", "projectSlug": "etlab-plus" },
+    { "name": "Tailwind CSS", "projectSlug": "ai-study-coach" }
+  ],
+  "backend": [
+    { "name": "FastAPI", "projectSlug": "local-ai-assistant" },
+    { "name": "Node.js", "projectSlug": "etlab-plus" },
+    { "name": "Express", "projectSlug": "rymeds" },
+    { "name": "REST APIs", "projectSlug": "ai-study-coach" }
+  ],
+  "frontend": [
+    { "name": "React", "projectSlug": "ai-study-coach" },
+    { "name": "Next.js", "projectSlug": "etlab-plus" },
+    { "name": "TypeScript", "projectSlug": "etlab-plus" },
+    { "name": "Tailwind CSS", "projectSlug": "ai-study-coach" },
+    { "name": "Framer Motion", "projectSlug": "ai-study-coach" }
+  ],
+  "ai": [
+    { "name": "Ollama", "projectSlug": "local-ai-assistant" },
+    { "name": "LLaMA 3.1", "projectSlug": "local-ai-assistant" },
+    { "name": "Mistral", "projectSlug": "local-ai-assistant" },
+    { "name": "MATLAB (ML/DL)", "projectSlug": "robotics-internship" },
+    { "name": "Prompt Engineering", "projectSlug": "ai-study-coach" }
+  ],
+  "databases": [
+    { "name": "PostgreSQL", "projectSlug": "etlab-plus" },
+    { "name": "SQLite", "projectSlug": "local-ai-assistant" },
+    { "name": "Supabase", "projectSlug": "etlab-plus" }
+  ],
+  "developerTools": [
+    { "name": "Git", "projectSlug": "devops-environment" },
+    { "name": "GitHub", "projectSlug": "devops-environment" },
+    { "name": "Docker", "projectSlug": "devops-environment" },
+    { "name": "VS Code", "projectSlug": "ai-study-coach" },
+    { "name": "MSYS2", "projectSlug": "devops-environment" }
+  ],
+  "operatingSystems": [
+    { "name": "Linux", "projectSlug": "devops-environment" },
+    { "name": "Arch Linux", "projectSlug": "devops-environment" },
+    { "name": "Windows 11", "projectSlug": "devops-environment" }
+  ],
+  "currentlyLearning": [
+    { "name": "PyTorch", "projectSlug": null },
+    { "name": "ROS2", "projectSlug": null },
+    { "name": "CUDA", "projectSlug": null },
+    { "name": "Rust", "projectSlug": null },
+    { "name": "OpenCV", "projectSlug": null }
+  ]
+}

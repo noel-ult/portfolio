@@ -1,0 +1,51 @@
+{
+  "lastUpdated": "August 2026",
+  "timezone": "IST (UTC+5:30)",
+  "responseTime": "Within 24 Hours",
+  "availableFor": "AI System Architecture, Robotics Projects & Developer Tool Collaborations",
+  "portfolioVersion": "v2.4.0-production",
+  "lastPortfolioUpdate": "August 2026",
+  "currentFocus": "Offline AI • Computer Vision • Robotics",
+  "building": [
+    "Offline local AI assistant with fast quantized LLaMA 3.1 8B inference",
+    "IEEE Sensors Council robotics telemetry processor with complementary filtering",
+    "Multi-tenant lab management database platform with PostgreSQL RLS"
+  ],
+  "reading": [
+    "Designing Data-Intensive Applications by Martin Kleppmann",
+    "Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow",
+    "The Linux Programming Interface by Michael Kerrisk"
+  ],
+  "learning": [
+    "Quantized GGUF model memory layout & CPU cache optimization",
+    "ROS2 (Robot Operating System) node pub/sub communications",
+    "PostgreSQL Row-Level Security & index tuning for multi-tenant isolation"
+  ],
+  "experiment": "Benchmarking LLaMA 3.1 8B Q4_K_M vs Q8_0 token generation latency on 16GB host RAM without GPU acceleration.",
+  "goal": "Build lightweight, privacy-respecting local software that operates seamlessly without cloud dependencies.",
+  "playlist": [
+    "Huberman Lab — Neural Networks & Focus Mechanics",
+    "Lex Fridman Podcast — Robotics, AI & Autonomous Systems",
+    "Chopin: Nocturnes (Deep Work Coding Audio)"
+  ],
+  "hardware": [
+    "HP Laptop (Core i5, 16GB DDR4 RAM, 512GB NVMe SSD)",
+    "Arduino Uno R3 & ESP32 Microcontrollers",
+    "MPU-6050 6-DOF Accelerometer & Gyroscope Sensors",
+    "HC-05 Bluetooth & HC-SR04 Ultrasonic Transceivers"
+  ],
+  "software": [
+    "Arch Linux (Linux 6.10 LTS Kernel)",
+    "Neovim & VS Code (Dark Theme)",
+    "Ollama local LLM runner (GGUF)",
+    "PostgreSQL 16 & DBeaver",
+    "FastAPI & Next.js 16"
+  ],
+  "devSetup": {
+    "os": "Arch Linux / Windows 11 Dual Boot",
+    "editor": "VS Code & Neovim",
+    "terminal": "Kitty + Zsh (Oh My Zsh)",
+    "shell": "zsh with starship prompt",
+    "aiWorkflow": "Ollama running LLaMA 3.1 local model"
+  }
+}

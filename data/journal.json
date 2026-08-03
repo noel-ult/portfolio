@@ -1,0 +1,99 @@
+[
+  {
+    "id": "offline-llm",
+    "title": "Setting Up a Fully Local LLM Stack",
+    "slug": "offline-llm-ollama",
+    "excerpt": "No cloud APIs, no subscriptions, and zero telemetry leaving my laptop. Benchmarking Ollama quantization on CPU hardware.",
+    "date": "2025-03-15",
+    "readTime": 6,
+    "tags": ["AI", "Ollama", "LLaMA", "Linux", "Python"],
+    "category": "AI Engineering",
+    "context": "Cloud LLMs introduce per-token costs, API rate limits, and privacy risks when working with private notes or code repositories.",
+    "problem": "Running raw 8B parameter models on non-GPU CPU hardware (Intel i5-13420H) resulted in unusable latency (~2.5 tokens per second).",
+    "approach": "Switched model execution to Ollama runtime using 4-bit K-quantization (Q4_K_M) to reduce memory bandwidth demands on RAM.",
+    "result": "Boosted inference speed to ~8.5 tokens/sec for LLaMA 3.1 8B and ~10.2 tokens/sec for Mistral 7B, achieving responsive streaming responses locally.",
+    "lessonLearned": "Memory bandwidth is the primary bottleneck for local CPU inference, not raw clock frequency. Quantization parameters matter far more than raw model size.",
+    "codeSnippets": [
+      {
+        "language": "bash",
+        "description": "Installing Ollama and pulling quantized 4-bit LLaMA model",
+        "code": "curl -fsSL https://ollama.ai/install.sh | sh\nollama pull llama3.1:8b\nollama run llama3.1:8b"
+      },
+      {
+        "language": "python",
+        "description": "FastAPI streaming endpoint connecting to local Ollama runtime",
+        "code": "import ollama\nfrom fastapi import FastAPI\nfrom fastapi.responses import StreamingResponse\n\napp = FastAPI()\n\n@app.post('/api/chat')\nasync def stream_chat(prompt: str):\n    async def event_generator():\n        stream = ollama.chat(model='llama3.1:8b', messages=[{'role': 'user', 'content': prompt}], stream=True)\n        for chunk in stream:\n            yield f\"data: {chunk['message']['content']}\\n\\n\"\n    return StreamingResponse(event_generator(), media_type='text/event-stream')"
+      }
+    ],
+    "image": "/images/journal/offline-llm.png"
+  },
+  {
+    "id": "robotics-internship",
+    "title": "Two Weeks of Sensors and Soldering Irons",
+    "slug": "robotics-internship-ieee",
+    "excerpt": "Hardware debugging requires a completely different mindset. Lessons from building sensors and motor drivers at Luminar Technolab.",
+    "date": "2024-08-10",
+    "readTime": 8,
+    "tags": ["Robotics", "IEEE", "Sensors", "Arduino", "Embedded C"],
+    "category": "Robotics",
+    "context": "Participated in an intensive hands-on robotics internship organized by IEEE Sensors Council Kerala Chapter at Luminar Technolab.",
+    "problem": "Sensor noise from raw MPU-6050 accelerometer/gyroscope modules caused erratic motor jitter on an autonomous line-following chassis.",
+    "approach": "Implemented a software complementary filter combining high-pass filtered gyroscope data with low-pass filtered accelerometer telemetry.",
+    "result": "Stabilized robot orientation readings and achieved smooth cornering control without hardware replacement.",
+    "lessonLearned": "Hardware debugging doesn't give clean stack traces. Loose wiring, voltage drops, and sensor noise must be isolated systematically using datasheets.",
+    "codeSnippets": [
+      {
+        "language": "cpp",
+        "description": "Complementary filter implementation for IMU sensor smoothing",
+        "code": "#include <Arduino.h>\n\nfloat angle = 0;\nfloat alpha = 0.96; // Filter coefficient\n\nvoid updateOrientation(float gyroRate, float accelAngle, float dt) {\n  angle = alpha * (angle + gyroRate * dt) + (1.0 - alpha) * accelAngle;\n}"
+      }
+    ],
+    "image": "/images/journal/robotics-internship.png"
+  },
+  {
+    "id": "etlab-lessons",
+    "title": "Database Schema Architecture and Row-Level Security",
+    "slug": "lessons-etlab-plus",
+    "excerpt": "Why flat schemas fail in multi-tenant institution software, and how PostgreSQL RLS eliminated authorization vulnerabilities.",
+    "date": "2024-05-20",
+    "readTime": 7,
+    "tags": ["PostgreSQL", "Supabase", "React", "Architecture", "RLS"],
+    "category": "Software Architecture",
+    "context": "Building ETLab+, a multi-role lab management system for engineering colleges handling students, instructors, and administrators.",
+    "problem": "Initial flat database schema allowed potential data leaks between departments when authorization checks were relied on only in API route handlers.",
+    "approach": "Redesigned schema with tenant-isolated tables and enforced PostgreSQL Row-Level Security (RLS) policies directly on database connections.",
+    "result": "Eliminated authorization vulnerability risks at zero additional runtime cost; queries naturally scoped to active tenant roles.",
+    "lessonLearned": "Push security down to the database level. Application layer authorization checks are prone to developer oversight during rapid iteration.",
+    "codeSnippets": [
+      {
+        "language": "sql",
+        "description": "PostgreSQL tenant isolation policy utilizing session variable settings",
+        "code": "CREATE TABLE attendance (\n  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),\n  institution_id UUID NOT NULL REFERENCES institutions(id),\n  student_id UUID NOT NULL REFERENCES students(id),\n  lab_session_id UUID NOT NULL REFERENCES lab_sessions(id),\n  present BOOLEAN DEFAULT FALSE\n);\n\nALTER TABLE attendance ENABLE ROW LEVEL SECURITY;\n\nCREATE POLICY tenant_isolation ON attendance\n  USING (institution_id = current_setting('app.institution_id')::UUID);"
+      }
+    ],
+    "image": "/images/journal/etlab-lessons.png"
+  },
+  {
+    "id": "arch-linux-journey",
+    "title": "30 Days on Arch Linux — System Recovery & Customization",
+    "slug": "arch-linux-journey",
+    "excerpt": "Replacing Ubuntu with a minimalist Arch Linux build. Lessons from GRUB recovery, Hyprland Wayland configuration, and TLP power tuning.",
+    "date": "2025-01-10",
+    "readTime": 5,
+    "tags": ["Linux", "Arch", "Hyprland", "Tools", "DevOps"],
+    "category": "Operating Systems",
+    "context": "Transitioned main development laptop to Arch Linux to achieve complete low-level control over system services and memory overhead.",
+    "problem": "Initial setup encountered display server screen-sharing drops, power suspend issues, and occasional bootloader breaks after kernel updates.",
+    "approach": "Configured Hyprland Wayland compositor declaratively, installed xdg-desktop-portal-hyprland, and set up TLP power profiles.",
+    "result": "System boot time dropped under 6 seconds, RAM usage idling under 600MB, with seamless keyboard-driven tiling workspace management.",
+    "lessonLearned": "Building an operating system configuration from scratch demystifies systemd, kernel modules, and package dependencies.",
+    "codeSnippets": [
+      {
+        "language": "bash",
+        "description": "Arch Linux system bootstrap partition and mount commands",
+        "code": "mkfs.ext4 /dev/nvme0n1p2\nmount /dev/nvme0n1p2 /mnt\npacstrap /mnt base linux linux-firmware neovim git systemd"
+      }
+    ],
+    "image": "/images/journal/arch-linux.png"
+  }
+]

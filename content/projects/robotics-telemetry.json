@@ -1,0 +1,30 @@
+{
+  "title": "Robotics Telemetry Processor",
+  "slug": "robotics-telemetry-processor",
+  "tagline": "Embedded C++ sensor data pipeline filtering noisy MPU-6050 accelerometer and gyroscope signals for robot navigation.",
+  "description": "Developed during my Robotics Internship at IEEE Sensors Council & Luminar Technolab to stabilize mobile robot tilt calculations.",
+  "featured": false,
+  "status": "Completed",
+  "year": "2026",
+  "category": "Robotics",
+  "github": "https://github.com/Ultra2021",
+  "demo": "https://noelbiju.com/projects/robotics-telemetry-processor",
+  "coverImage": "projects/robotics-telemetry.jpg",
+  "screenshots": [
+    {
+      "title": "Live Orientation Waveform",
+      "caption": "Filtered tilt estimation (blue) vs raw noisy accelerometer readings (red)",
+      "type": "terminal"
+    }
+  ],
+  "technologies": ["Robotics", "C++", "Arduino", "Sensors", "Embedded Systems", "I2C"],
+  "architecture": ["MPU-6050 IMU Sensor -> I2C Bus -> C++ Complementary Filter -> Serial Stream -> Python Plotter"],
+  "database": ["Circular memory buffer on microcontroller holding 200 telemetry frames for real-time moving average calculation."],
+  "apiEndpoints": ["SensorPipeline::init()", "SensorPipeline::update(float dt)", "SensorPipeline::getOrientation()"],
+  "folderStructure": ["robotics-telemetry/\n├── src/\n│   ├── ComplementaryFilter.cpp\n│   ├── IMUDriver.cpp\n│   └── main.cpp\n├── python_plotter/telemetry_plot.py\n└── README.md"],
+  "timeline": ["2026: IEEE Sensors Council Internship & C++ filter implementation"],
+  "challenges": ["Eliminating cumulative gyroscopic drift over long operating intervals without incurring heavy floating-point calculation delay on 16MHz CPUs."],
+  "lessons": ["Filtering noise at the sensor intake layer prevents exponential error accumulation in downstream navigation algorithms."],
+  "futureImprovements": ["Port to ROS2 (Robot Operating System) node architecture on Raspberry Pi."],
+  "relatedProjects": ["local-ai-assistant", "rymeds"]
+}

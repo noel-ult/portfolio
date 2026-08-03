@@ -1,0 +1,14 @@
+{
+  "items": [
+    { "label": "Home", "href": "/", "icon": "home" },
+    { "label": "About", "href": "/about", "icon": "user" },
+    { "label": "Projects", "href": "/projects", "icon": "folder" },
+    { "label": "Journey", "href": "/journey", "icon": "git-branch" },
+    { "label": "Certificates", "href": "/certificates", "icon": "award" },
+    { "label": "GitHub", "href": "/github", "icon": "github" },
+    { "label": "Experience", "href": "/experience", "icon": "briefcase" },
+    { "label": "Journal", "href": "/journal", "icon": "book-open" },
+    { "label": "Now", "href": "/now", "icon": "clock" },
+    { "label": "Contact", "href": "/contact", "icon": "mail" }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "name": "Noel Biju",
+  "role": "Software Engineer",
+  "email": "noelbiju2552@gmail.com",
+  "github": "https://github.com/Ultra2021",
+  "linkedin": "https://www.linkedin.com/in/noel-biju-788b81332",
+  "resume": "/resume.pdf",
+  "website": "https://noelbiju.com",
+  "location": "Kerala, India",
+  "seo": {
+    "defaultTitle": "Noel Biju — Software Engineer",
+    "defaultDescription": "Building practical AI, robotics and developer tools. Software engineering portfolio focused on offline-first systems and local LLMs.",
+    "ogImage": "/images/profile.jpg"
+  },
+  "theme": {
+    "default": "dark",
+    "accentColor": "#3B82F6"
+  },
+  "analytics": {
+    "enabled": true
+  },
+  "socialLinks": {
+    "github": "https://github.com/Ultra2021",
+    "linkedin": "https://www.linkedin.com/in/noel-biju-788b81332",
+    "email": "mailto:noelbiju2552@gmail.com"
+  }
+}

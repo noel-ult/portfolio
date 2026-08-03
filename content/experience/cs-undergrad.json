@@ -1,0 +1,17 @@
+{
+  "id": "cs-undergrad",
+  "title": "B.Tech in Computer Science & Engineering",
+  "company": "Sahrdaya College of Engineering & Technology",
+  "location": "Kodakara, Thrissur, Kerala",
+  "startDate": "2024",
+  "endDate": "Present",
+  "type": "Education",
+  "description": "Undergraduate computer science student focusing on offline AI models, database management systems, algorithms, and software engineering.",
+  "skills": ["Computer Science", "Algorithms", "Data Structures", "PostgreSQL", "Systems Architecture"],
+  "achievements": [
+    "Awarded Best S1 Project for RyMeds Pharmacy Management System.",
+    "Awarded Best S3 Project for ETLab+ Multi-Tenant Laboratory Platform."
+  ],
+  "images": [],
+  "projects": ["rymeds", "etlab-plus", "local-ai-assistant"]
+}

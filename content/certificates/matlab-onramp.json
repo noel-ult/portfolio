@@ -1,0 +1,11 @@
+{
+  "title": "MATLAB Onramp & Signal Processing",
+  "issuer": "MathWorks",
+  "category": "Signal Processing & Computing",
+  "issueDate": "Nov 2024",
+  "credentialId": "MW-MATLAB-99218",
+  "verificationUrl": "https://matlabacademy.mathworks.com/verify/MW-MATLAB-99218",
+  "image": "certificates/matlab-onramp.jpg",
+  "description": "Matrix computations, numerical data analysis, signal filtering, and mathematical modeling techniques.",
+  "featured": true
+}
