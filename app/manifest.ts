@@ -2,24 +2,26 @@ import { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Noel Biju — Portfolio",
+    name: "Noel Biju — Software Engineer",
     short_name: "Noel Biju",
-    description: "AI Engineer, Software Developer & Robotics Enthusiast",
+    description:
+      "Software Engineer passionate about AI, Full Stack Development, Cloud, Cybersecurity and building products that solve real-world problems.",
     start_url: "/",
     display: "standalone",
     background_color: "#09090B",
     theme_color: "#09090B",
     icons: [
       {
-        src: "/icon-192.png",
-        sizes: "192x192",
+        src: "/icon",
+        sizes: "32x32",
         type: "image/png",
       },
       {
-        src: "/icon-512.png",
-        sizes: "512x512",
+        src: "/apple-icon",
+        sizes: "180x180",
         type: "image/png",
       },
     ],
   };
 }
+

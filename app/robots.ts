@@ -5,8 +5,8 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: "/api/",
     },
-    sitemap: "https://noelbiju.dev/sitemap.xml",
+    sitemap: "https://noelbiju.in/sitemap.xml",
   };
 }
+

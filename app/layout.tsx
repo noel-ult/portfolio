@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 import { Providers } from "@/components/providers";
 
@@ -45,54 +47,47 @@ const geistMono = localFont({
   fallback: ["ui-monospace", "monospace"],
 });
 
-const siteUrl = "https://noelbiju.dev";
+const siteUrl = "https://noelbiju.in";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Noel Biju — Software Developer & CS Undergrad",
+    default: "Noel Biju",
     template: "%s | Noel Biju",
   },
   description:
-    "Computer Science undergraduate building offline AI systems, robotics tools, and practical software that solves real problems.",
+    "Software Engineer passionate about AI, Full Stack Development, Cloud, Cybersecurity and building products that solve real-world problems.",
   keywords: [
     "Noel Biju",
-    "Software Developer",
-    "Machine Learning",
-    "Robotics",
-    "Offline LLM",
-    "Ollama",
-    "FastAPI",
-    "React",
+    "Software Engineer",
+    "Full Stack Developer",
+    "AI Engineer",
     "Next.js",
-    "Kerala",
+    "React",
+    "Portfolio",
+    "Cybersecurity",
+    "Developer",
     "India",
   ],
   authors: [{ name: "Noel Biju", url: siteUrl }],
   creator: "Noel Biju",
+  alternates: {
+    canonical: siteUrl,
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
     url: siteUrl,
-    title: "Noel Biju — Software Developer & CS Undergrad",
+    title: "Noel Biju",
     description:
-      "Computer Science undergraduate building offline AI systems, robotics applications, and developer tools.",
+      "Software Engineer building AI applications, full-stack products and developer tools.",
     siteName: "Noel Biju",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Noel Biju — Portfolio",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Noel Biju — Software Developer & CS Undergrad",
+    title: "Noel Biju",
     description:
-      "CS undergraduate building offline AI, robotics applications, and practical tools.",
-    images: ["/og-image.png"],
+      "Software Engineer building AI applications, full-stack products and developer tools.",
     creator: "@noelbiju",
   },
   robots: {
@@ -105,14 +100,6 @@ export const metadata: Metadata = {
       "max-image-preview": "large",
       "max-snippet": -1,
     },
-  },
-  manifest: "/manifest.json",
-  icons: {
-    icon: [
-      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
-      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
-    ],
-    apple: "/apple-touch-icon.png",
   },
 };
 
@@ -128,6 +115,21 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Noel Biju",
+    url: siteUrl,
+    occupation: "Software Engineer",
+    jobTitle: "Software Engineer",
+    description:
+      "Software Engineer passionate about AI, Full Stack Development, Cloud, Cybersecurity and building products that solve real-world problems.",
+    sameAs: [
+      "https://github.com/Ultra2021",
+      "https://www.linkedin.com/in/noel-biju-788b81332",
+    ],
+  };
+
   return (
     <html lang="en" className={`${geist.variable} ${geistMono.variable}`} suppressHydrationWarning>
       <head>
@@ -135,25 +137,16 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Person",
-              name: "Noel Biju",
-              url: siteUrl,
-              jobTitle: "AI Engineer & Software Developer",
-              description:
-                "Computer Science undergraduate specializing in AI engineering, offline LLM systems, and robotics.",
-              sameAs: [
-                "https://github.com/Ultra2021",
-                "https://www.linkedin.com/in/noel-biju-788b81332",
-              ],
-            }),
+            __html: JSON.stringify(jsonLd),
           }}
         />
       </head>
       <body className="font-sans antialiased" style={{ fontFamily: "var(--font-geist), Inter, ui-sans-serif" }}>
         <Providers>{children}</Providers>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
 }
+

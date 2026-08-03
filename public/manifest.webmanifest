@@ -1,0 +1,21 @@
+{
+  "name": "Noel Biju — Software Engineer",
+  "short_name": "Noel Biju",
+  "description": "Software Engineer passionate about AI, Full Stack Development, Cloud, Cybersecurity and building products that solve real-world problems.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#09090B",
+  "theme_color": "#09090B",
+  "icons": [
+    {
+      "src": "/icon",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-icon",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}
