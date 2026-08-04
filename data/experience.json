@@ -29,7 +29,7 @@
   },
   {
     "id": "etlab-plus-project",
-    "period": "Early 2025",
+    "period": "2025",
     "title": "ETLab+",
     "institution": "Sahrdaya College of Engineering & Technology",
     "type": "Project / Award",
@@ -42,26 +42,26 @@
     ]
   },
   {
-    "id": "local-ai-start",
-    "period": "Mid 2025",
-    "title": "Started Local AI",
-    "institution": "Self-Directed Research",
-    "type": "Research",
-    "summary": "Discovered Ollama. Started experimenting with running LLMs locally.",
-    "details": "Focused on offline-first AI systems running entirely on consumer hardware.",
+    "id": "tinkerhub-scholarship",
+    "period": "Dec 2025 – May 2026",
+    "title": "TinkerHub Scholarship Program",
+    "institution": "TinkerHub — Selected through Useless Projects 2.0 Hackathon",
+    "type": "Scholarship Program",
+    "summary": "Awarded a six-month scholarship program by TinkerHub after being selected through the Useless Projects 2.0 hackathon.",
+    "details": "Focused on learning, mentorship, project building, and community participation. This is not professional employment.",
     "highlights": [
-      "Benchmarked LLaMA and Mistral models on CPU-only hardware",
-      "Evaluated model quantization methods (Q4_K_M vs FP16 performance)",
-      "Created initial offline assistant API using Python and FastAPI"
+      "Selected through the Useless Projects 2.0 hackathon",
+      "Participated in mentorship and collaborative tech learning",
+      "Engaged with the TinkerHub community for project building and knowledge sharing"
     ]
   },
   {
     "id": "robotics-internship",
-    "period": "2026",
-    "title": "Robotics Internship",
+    "period": "June 2026",
+    "title": "Advanced Robotics Summer Internship",
     "institution": "IEEE Sensors Council Kerala Chapter × Luminar Technolab",
-    "type": "Internship",
-    "summary": "Worked with sensors, embedded systems and robotics.",
+    "type": "Professional Internship",
+    "summary": "Completed a two-week intensive robotics internship covering embedded systems, sensors, and hardware integration.",
     "details": "Learned that debugging hardware requires a completely different mindset.",
     "highlights": [
       "Wired ultrasonic, IR, and IMU sensors to Arduino and ESP32 microcontrollers",

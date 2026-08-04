@@ -45,7 +45,7 @@ export default function CertificatesArchivePage() {
               Certifications & Accreditations
             </h1>
             <p className="text-lg text-[#A1A1AA] max-w-2xl leading-relaxed">
-              Complete archive of verified certificates, IEEE internship credentials, NPTEL academic qualifications, and IBM AI accreditations.
+              Complete archive of verified certificates, IEEE robotics internship credentials, NPTEL academic qualifications, and IBM AI accreditations.
             </p>
           </div>
 

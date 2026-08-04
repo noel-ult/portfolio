@@ -1,7 +1,7 @@
 [
   {
     "year": "2024",
-    "title": "Started CS Engineering & Programming",
+    "title": "Started B.Tech in Computer Science",
     "description": "Began B.Tech in Computer Science at Sahrdaya College. Focused on C/C++ memory mechanics, linear data structures, and foundational algorithms.",
     "icon": "code",
     "relatedProject": null,
@@ -10,7 +10,7 @@
   },
   {
     "year": "Late 2024",
-    "title": "RyMeds — First Desktop Project",
+    "title": "RyMeds — Won Best S1 Project",
     "description": "Built a medical store inventory and billing system with embedded SQLite database. Awarded Best S1 Project.",
     "icon": "database",
     "relatedProject": "rymeds",
@@ -18,8 +18,8 @@
     "relatedCertificate": null
   },
   {
-    "year": "Early 2025",
-    "title": "ETLab+ — Multi-Tenant Architecture",
+    "year": "2025",
+    "title": "ETLab+ — Won Best S3 Project",
     "description": "Architected college lab management software with PostgreSQL Row-Level Security and role-based permissions. Awarded Best S3 Project.",
     "icon": "shield",
     "relatedProject": "etlab-plus",
@@ -27,18 +27,18 @@
     "relatedCertificate": null
   },
   {
-    "year": "Mid 2025",
-    "title": "Explored Offline Local AI (Ollama)",
-    "description": "Started running quantized LLMs (LLaMA 3.1 8B, Mistral 7B) locally on host RAM via Ollama without cloud APIs.",
-    "icon": "cpu",
-    "relatedProject": "local-ai-assistant",
-    "relatedJournal": "local-llm",
+    "year": "Dec 2025 – May 2026",
+    "title": "TinkerHub Scholarship Program",
+    "description": "Selected through the Useless Projects 2.0 hackathon. Awarded a six-month scholarship program focused on learning, mentorship, project building, and community participation.",
+    "icon": "award",
+    "relatedProject": null,
+    "relatedJournal": null,
     "relatedCertificate": null
   },
   {
-    "year": "2026",
-    "title": "Robotics Internship (IEEE Sensors Council)",
-    "description": "Analyzed sensor telemetry, implemented software complementary filters for MPU-6050 IMUs, and debugged hardware.",
+    "year": "June 2026",
+    "title": "Advanced Robotics Summer Internship",
+    "description": "Completed a two-week intensive robotics internship at IEEE Sensors Council Kerala Chapter × Luminar Technolab covering embedded systems, sensors, and hardware integration.",
     "icon": "bot",
     "relatedProject": "robotics-telemetry-processor",
     "relatedJournal": "robotics",
@@ -50,15 +50,6 @@
     "description": "Developing local AI study coaches, offline desktop assistants, and developer productivity tools.",
     "icon": "brain",
     "relatedProject": "ai-study-coach",
-    "relatedJournal": null,
-    "relatedCertificate": null
-  },
-  {
-    "year": "Future Focus",
-    "title": "Edge AI & Autonomous Systems",
-    "description": "Targeting ultra-low latency quantized model execution on embedded edge hardware and ROS2 robotics nodes.",
-    "icon": "sparkles",
-    "relatedProject": null,
     "relatedJournal": null,
     "relatedCertificate": null
   }

@@ -15,7 +15,7 @@
     "id": "bug-lessons",
     "title": "Every bug teaches something deep",
     "explanation": "System failures reveal invalid assumptions about memory, network boundaries, timing, or concurrency that documentation alone rarely highlights.",
-    "realExample": "Spent hours diagnosing MPU-6050 sensor jitter during my robotics internship, which led me to implement software complementary filters to reconcile low-pass accelerometer data with high-pass gyroscope readings."
+    "realExample": "Spent hours diagnosing MPU-6050 sensor jitter during my Advanced Robotics Summer Internship, which led me to implement software complementary filters to reconcile low-pass accelerometer data with high-pass gyroscope readings."
   },
   {
     "id": "documentation",

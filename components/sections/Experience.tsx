@@ -26,7 +26,7 @@ export function Experience() {
               Experience
             </div>
             <h2 className="text-4xl sm:text-5xl font-bold tracking-tight">
-              Work & Engineering Journey
+              Professional Experience & Programs
             </h2>
           </motion.div>
 

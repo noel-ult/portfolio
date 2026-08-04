@@ -36,7 +36,7 @@
     "readTime": 8,
     "tags": ["Robotics", "IEEE", "Sensors", "Arduino", "Embedded C"],
     "category": "Robotics",
-    "context": "Participated in an intensive hands-on robotics internship organized by IEEE Sensors Council Kerala Chapter at Luminar Technolab.",
+    "context": "Completed a two-week intensive robotics internship at IEEE Sensors Council Kerala Chapter × Luminar Technolab covering embedded systems, sensors, and hardware integration.",
     "problem": "Sensor noise from raw MPU-6050 accelerometer/gyroscope modules caused erratic motor jitter on an autonomous line-following chassis.",
     "approach": "Implemented a software complementary filter combining high-pass filtered gyroscope data with low-pass filtered accelerometer telemetry.",
     "result": "Stabilized robot orientation readings and achieved smooth cornering control without hardware replacement.",

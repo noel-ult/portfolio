@@ -46,6 +46,7 @@ import roboticsCert from "../content/certificates/robotics.json";
 import nasscomCert from "../content/certificates/nasscom.json";
 
 import roboticsInternshipExp from "../content/experience/robotics-internship.json";
+import tinkerhubScholarshipExp from "../content/experience/tinkerhub-scholarship.json";
 import csUndergradExp from "../content/experience/cs-undergrad.json";
 
 import timelineData from "../content/timeline.json";
@@ -96,17 +97,17 @@ async def stream_chat(req: ChatRequest):
 > **Key Lesson**: Memory bandwidth is the primary bottleneck for CPU-bound LLM inference, not raw compute capacity. Streamed token buffers prevent perception of latency.`,
   },
   {
-    title: "Sensors, Signals & Noise: Filtering Telemetry during my IEEE Robotics Internship",
+    title: "Sensors, Signals & Noise: Filtering Telemetry during my Advanced Robotics Summer Internship",
     date: "2026-06-10",
     readingTime: 8,
     tags: ["Robotics", "C++", "Sensors", "Arduino", "Embedded Systems"],
     coverImage: "journal/robotics.jpg",
-    summary: "Debugging hardware sensor jitter during my robotics internship using C++ complementary filters to combine accelerometer and gyroscope data.",
+    summary: "Debugging hardware sensor jitter during my Advanced Robotics Summer Internship using C++ complementary filters to combine accelerometer and gyroscope data.",
     featured: true,
     slug: "robotics-internship-ieee",
-    content: `# Context & IEEE Internship Background
+    content: `# Context & Advanced Robotics Summer Internship Background
 
-During my robotics internship at **IEEE Sensors Council × Luminar Technolab**, I worked on telemetry signal extraction for mobile autonomous robots.
+During my Advanced Robotics Summer Internship at **IEEE Sensors Council × Luminar Technolab**, I worked on telemetry signal extraction for mobile autonomous robots.
 
 ## The Technical Problem
 
@@ -202,6 +203,7 @@ const ALL_CERTIFICATES: Certificate[] = [
 
 const ALL_EXPERIENCE: Experience[] = [
   ExperienceSchema.parse(roboticsInternshipExp),
+  ExperienceSchema.parse(tinkerhubScholarshipExp),
   ExperienceSchema.parse(csUndergradExp),
 ];
 

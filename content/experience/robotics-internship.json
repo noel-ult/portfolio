@@ -1,12 +1,12 @@
 {
   "id": "robotics-internship",
-  "title": "Robotics Engineering Intern",
-  "company": "IEEE Sensors Council × Luminar Technolab",
+  "title": "Advanced Robotics Summer Internship",
+  "company": "IEEE Sensors Council Kerala Chapter × Luminar Technolab",
   "location": "Kochi, Kerala, India",
-  "startDate": "Jan 2026",
-  "endDate": "Feb 2026",
-  "type": "Internship",
-  "description": "Completed a 30-day intensive hands-on robotics internship focusing on sensor telemetry, signal filtering, and microcontroller integration.",
+  "startDate": "June 2026",
+  "endDate": "June 2026",
+  "type": "Professional Internship",
+  "description": "Completed a two-week intensive robotics internship covering embedded systems, sensors, hardware integration, and applied robotics.",
   "skills": ["Robotics", "Sensors", "Arduino", "Embedded C++", "I2C", "MATLAB"],
   "achievements": [
     "Implemented C++ complementary filter to eliminate MPU-6050 sensor jitter and gyroscopic drift.",

@@ -1,16 +1,16 @@
 ---
-title: "Sensors, Signals & Noise: Filtering Telemetry during my IEEE Robotics Internship"
+title: "Sensors, Signals & Noise: Filtering Telemetry during my Advanced Robotics Summer Internship"
 date: "2026-06-10"
 readingTime: 8
 tags: ["Robotics", "C++", "Sensors", "Arduino", "Embedded Systems"]
 coverImage: "journal/robotics.jpg"
-summary: "Debugging hardware sensor jitter during my robotics internship using C++ complementary filters to combine accelerometer and gyroscope data."
+summary: "Debugging hardware sensor jitter during my Advanced Robotics Summer Internship using C++ complementary filters to combine accelerometer and gyroscope data."
 featured: true
 ---
 
-# Context & IEEE Internship Background
+# Context & Advanced Robotics Summer Internship Background
 
-During my robotics internship at **IEEE Sensors Council × Luminar Technolab**, I worked on telemetry signal extraction for mobile autonomous robots.
+During my Advanced Robotics Summer Internship at **IEEE Sensors Council × Luminar Technolab**, I worked on telemetry signal extraction for mobile autonomous robots.
 
 ## The Technical Problem
 
