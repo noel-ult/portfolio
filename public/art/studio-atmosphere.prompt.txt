@@ -1,0 +1,5 @@
+Tool: built-in image_gen image edit
+Source: studio-background.png
+Output: studio-atmosphere.png (WebP encoding used on the page)
+
+Edit target image: remove the entire rough stone slab/platform at the bottom, including its top surface, front edge, orange reflections on the slab, and any ground plane. Seamlessly extend the existing near-black smoky studio backdrop all the way to the bottom edge. Keep the existing soft atmospheric smoke and subtle dark warm amber haze, with no solid foreground geometry. Preserve the photographic mood and portrait framing. The finished image is only an empty dark smoky background: absolutely no slab, pedestal, floor, platform, objects, typography, horizon line, or hard surface.

@@ -1,0 +1,5 @@
+Tool: built-in image_gen image edit
+Source: /tmp/codex-clipboard-vxr5qZ.png
+Output: studio-background.png
+
+Edit this image to keep ONLY the environment background. Remove the entire foreground mechanical sculpture: the large metallic chevron, every metal plate, bracket, spring, screw and floating bolt, and the glowing orange translucent rectangular bar. Remove all text overlays, including navigation at the top and small text at the bottom. Seamlessly reconstruct the dark near-black studio background where the objects were. Preserve the existing rough black stone platform at the bottom, its perspective, texture, framing, and subtle warm orange reflected lighting. Keep the original portrait composition and moody photographic lighting. The result must be a clean empty studio background with the stone platform, no foreground objects, no typography, no logos.

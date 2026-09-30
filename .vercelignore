@@ -1,0 +1,9 @@
+.git
+.next
+out
+node_modules
+*.tsbuildinfo
+*.log
+premium-audit.json
+.env*
+!.env.example
