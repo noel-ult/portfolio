@@ -22,7 +22,7 @@ The `out/` directory can be deployed to a static host. No backend, analytics, co
 
 ## Deploy on Vercel
 
-Import `noel-ult/portfolio` into Vercel or redeploy its existing connected project. Use production branch `main` and repository root `.`. The committed `vercel.json` sets the Next.js framework, `npm ci` install command, `npm run build` build command, and `out` output directory. `package.json` selects Node.js 24. No environment variables are required.
+Import `noel-ult/portfolio` into Vercel or redeploy its existing connected project. Use production branch `main` and repository root `.`. The committed `vercel.json` sets the Next.js framework, `npm ci` install command, `npm run build` build command, and `.next` framework output directory. Vercel’s Next.js adapter reads the build manifests there and automatically collects the static export from `out`; do not set its framework output directory to `out`. `package.json` selects Node.js 24. No environment variables are required.
 
 For a custom domain, set the optional `NEXT_PUBLIC_SITE_URL` environment variable to its public HTTPS origin and rebuild. Without it, metadata, robots, and sitemap use the repository’s advertised production URL, `https://portfolio-three-puce-77.vercel.app`. The page includes a favicon, canonical URL, social metadata, and static `robots.txt` and `sitemap.xml`. Search indexing is enabled following the owner’s publication request.
 
