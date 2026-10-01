@@ -12,6 +12,7 @@ export type Project = {
   date?: string;
   links?: PortfolioLink[];
   preview?: "pageradar" | "choru-vaari";
+  entryNote?: { thought: string; label?: string };
 };
 export type Experience = {
   id: string;
@@ -85,6 +86,7 @@ export const portfolio: Portfolio = {
   projects: [
     {
       id: "pageradar", title: "PageRadar",
+      entryNote: { thought: "Notice what changes" },
       summary: "Keep an eye on the pages that matter. PageRadar monitors public webpages and keeps a history of what changed.",
       problem: "Important updates to deadlines, pricing, or eligibility are easy to miss when you have to revisit every page yourself.",
       approach: "Scheduled checks save an initial snapshot, detect content changes, and record new snapshots in a watch’s history. A Next.js interface connects to a NestJS GraphQL API, with Prisma and PostgreSQL handling the records.",
@@ -94,6 +96,7 @@ export const portfolio: Portfolio = {
     },
     {
       id: "choru-vaari", title: "Choru Vaari Kodukkam",
+      entryNote: { thought: "Experiment with everyday life", label: "Choru Vaari" },
       summary: "How many handfuls of rice are on your plate? A playful computer vision project gives a very serious answer to a very unserious question.",
       contribution: "Hand tracking, vaari estimation, and frontend. Built with Samuel Thomas C for TinkerHub Useless Projects.",
       approach: "MediaPipe hand landmarks estimate a personal handful capacity. Local Canvas image segmentation estimates the rice on a plate, and the calculator expresses it in vaaris. A built-in demo works without a webcam.",
@@ -112,6 +115,7 @@ export const portfolio: Portfolio = {
     },
     {
       id: "local-ai-assistant", title: "Local AI Assistant",
+      entryNote: { thought: "Explore local intelligence", label: "AI Buddy" },
       summary: "An offline assistant built around locally running language models, persistent conversation memory, and multiple chat sessions.",
       approach: "Uses Ollama to run models locally, with separate modules for the AI engine, conversation management, and memory. The project explores LLaMA and Mistral without depending on a cloud chat service.",
       technologies: ["Python", "Ollama", "LLaMA", "Mistral"],

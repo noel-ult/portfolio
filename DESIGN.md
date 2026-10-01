@@ -1,7 +1,7 @@
 ---
 version: alpha
 name: "Afterimage"
-description: "A cinematic portfolio with an interactive impossible-room entrance and inline project stories."
+description: "A personal portfolio with an interactive portrait entrance and inline project stories."
 colors:
   primary: "#FF6B18"
   background: "#090909"
@@ -30,17 +30,17 @@ omitted:
 
 ## Overview
 
-The portfolio introduces itself as an impossible typographic room. Five native 3D planes form an ivory ceiling and floor, ember side walls, and a dark doorway reading “STEP INSIDE.” The owner’s name is part of the architecture. Pointer movement or touch changes the viewpoint; Enter unfolds the walls outward and expands the doorway into the portfolio.
+The entrance, “Through Noel’s Eyes,” introduces Noel through his supplied mountain photograph, oversized name, and verified work. A broad feathered colour lens follows pointer movement or touch dragging across a muted version of the same photograph. Three open annotations connect curiosity to PageRadar, everyday experimentation to Choru Vaari, and local intelligence to AI Buddy. The whole viewport is a native activation surface: click or tap anywhere to enter.
 
-The owner rejected the restrained membrane entrance and requested a more unusual replacement. This direction makes the entire viewport the interactive object. The underlying portfolio retains its typography-led composition. PORTFOLIO_REQUIREMENTS.md and src/content/portfolio.ts govern content. Noel’s supplied résumé provides profile facts; verified public GitHub repositories provide source links. The owner authorized replacing noel-ult/portfolio and preparing publication on Vercel; indexing is enabled. No personal facts or project claims are invented.
+The owner chose a portrait-led direction expressing curiosity and invention and rejected the previous room entrance. The name sits in the sky and the face remains unobstructed; mobile groups annotations below the portrait’s face. The existing portfolio retains its typography-led composition. PORTFOLIO_REQUIREMENTS.md and src/content/portfolio.ts govern content. Profile facts come from Noel’s supplied résumé, and public GitHub repositories provide source links. No personal facts or project claims are invented.
 
 ## Colors
 
-The main portfolio uses ink black, pale silver headings, muted gray supporting text, and ember orange for active navigation, arrows, and the contact underline. The entrance reuses the same tokens as physical materials: pale silver for ceiling/floor and orange for walls. Its local --entry-paper/--entry-dark aliases map directly to --ink/--paper; wall shading is derived with color-mix, not independent palette values. There is no light project band or solid orange contact band. CSS :root in src/app/globals.css is canonical; these tokens mirror it. Tailwind maps paper, ink, accent, and body font to those values.
+The main portfolio uses ink black, pale silver headings, muted gray supporting text, and ember orange for active navigation, arrows, and the contact underline. The entrance uses the same text and orange accent tokens over the original photograph. Black gradient overlays maintain text contrast while the colour lens preserves the photograph’s natural colours; no alternate portrait asset is generated. There is no light project band or solid orange contact band. CSS :root in src/app/globals.css is canonical; these tokens mirror it. Tailwind maps paper, ink, accent, and body font to those values.
 
 ## Typography
 
-Locally bundled Barlow Condensed 800 for the name and section/project headings; Space Grotesk 400/500 for readable 16–18px body copy; monospace only for short utility labels. The name uses clamp(100px, 16.7vw, 270px) on desktop, with responsive sizes and natural wrapping. Decorative architectural lettering is hidden from assistive technology; native text provides sharp perspective without raster textures. The page has one native h1.
+Locally bundled Barlow Condensed 800 for the name and section/project headings; Space Grotesk 400/500 for readable 16–18px body copy; monospace only for short utility labels. The name uses clamp(100px, 16.7vw, 270px) on desktop, with responsive sizes and natural wrapping. The entrance name and annotations are native readable text, with semantic labelling for the dialog and full-screen activation button. The page has one native h1.
 
 ## Layout
 
@@ -70,7 +70,7 @@ Preview colors are scoped to the product frames in src/app/globals.css. PageRada
 
 ArtworkStage uses public/art/studio-atmosphere.webp as a static decorative backdrop. The console and technical project tabs are removed from the page. Semantic sections and existing data-driven optional collections remain.
 
-EntryIntro owns the temporary dialog, native Enter and Skip buttons, session eligibility, focus, and cleanup. The renderer in src/lib/entry-room.ts coordinates CSS perspective, five transform-preserving planes, pointer easing, a finite arrival move, and the architectural exit. There are no new dependencies, raster assets, or WebGL context. Interaction updates compositor transforms through refs instead of React renders; drawing stops when the room settles.
+EntryIntro owns the temporary dialog, full-screen native activation button, keyboard-only Skip control, session eligibility, preparation deadline, focus, inert background, and cleanup. The renderer in src/lib/entry-portrait.ts coordinates the photograph’s colour mask, finite arrival scale, proximity emphasis, and expansion/dissolve. Pointer data and animation frames stay outside React state. Project entryNote metadata supplies verified annotation labels from src/content/portfolio.ts through the server page; the supplied profile photo provides the shared image source. No new dependencies or backend are added.
 
 ## Do's and Don'ts
 
@@ -82,10 +82,12 @@ EntryIntro owns the temporary dialog, native Enter and Skip buttons, session eli
 
 ## Motion and accessibility
 
-A finite 1,100ms arrival rotates the room into view, then waits for deliberate entry. Pointer movement or touch dragging tilts the room with eased follow-through. Motion stops after settling. Enter performs a short anticipation movement, folds the four surrounding planes outward, and expands the back plane into the viewport over 1,450ms. Supporting portfolio content appears during the final 300ms. Skip or Escape immediately restores the page. There is no sound, simulated loading, or mandatory pointer gesture.
+A finite 650ms arrival settles the portrait from scale 1.025 to 1 while name, thesis, notes, and hint appear in short staggered fades. Activation works throughout arrival. A broad colour lens starts over the portrait and follows pointer movement or dragging with eased movement. Drawing stops after settling; annotations remain readable without interaction. A pointer gesture travelling more than 8px is an exploration drag, and releasing it does not enter. Cancellation or multi-touch suppresses unintended activation. A fresh tap anywhere, Enter, Space, or assistive activation enters; repeat activation is ignored during exit.
 
-Entry runs once per tab session with the optional impossible-room-entry-v1 sessionStorage flag, written on completion or navigation bypass. Section URLs, restored scroll positions, reduced motion, forced colors, initially hidden tabs, unsupported rendering, or preparation exceeding 800ms bypass the entrance. The server-rendered page remains visible without JavaScript. Wheel or scrolling exits without preventing natural navigation. Resize, hash navigation, preference changes, and hiding the tab settle the entrance safely.
+Entry expands the colour lens beyond the viewport, fades annotations and name, and dissolves into the existing hero over 850ms. Hero supporting content reveals during the final 250ms. Escape, the keyboard-focusable Skip intro control, or the site’s skip-to-content link bypasses immediately. There is no sound, loading simulation, or idle loop.
 
-During the entrance, underlying page siblings are temporarily inert and the entrance is a labelled dialog. Enter receives initial focus; Tab cycles through the site skip-to-content link, Skip intro, and Enter portfolio. Completion restores prior inert states, moves focus to main after deliberate entry, and cancels every frame, animation, timer, and listener. Skip remains available during the exit. All room styles are released on completion.
+Entry runs once per tab session using through-noels-eyes-entry-v1 in optional sessionStorage. Section URLs, restored scroll positions, reduced motion, forced colours, initially hidden tabs, unsupported masking, failed image decoding, and preparation exceeding 800ms bypass it. The photograph must load successfully and local fonts must be ready before activation. Image decoding errors also bypass safely, but a deferred off-document decode promise does not block a photograph whose pixels are already loaded. Without JavaScript, the server-rendered portfolio remains visible. Wheel or scrolling exits without preventing navigation. Resize, hash navigation, preference changes, and hiding the tab settle safely.
 
-Section headings reveal once over 450ms. Body text remains visible. Active navigation moves over 180ms; arrows pass through links over 180ms. Project indicators rotate and titles shift 8px during disclosure. Reduced motion disables entry, reveals, animated expansion, transitions, and smooth scrolling. Focus and color contrast target WCAG AA. The entrance adds finite and interaction-driven 3D motion; the portfolio has no idle animation, custom cursor, scroll hijacking, or backend.
+Underlying page siblings are temporarily inert while the labelled entry dialog is active. The full-screen native button receives focus; Tab cycles through it, the keyboard-only Skip intro button, and the site skip-to-content link. Focus-visible outlines sit within the viewport. Completion restores prior inert states, focuses main after deliberate entry, and cancels every frame, animation, timer, and listener. No entrance inline animation styles remain.
+
+Section headings reveal once over 450ms. Body text remains visible. Active navigation moves over 180ms; arrows pass through links over 180ms. Project indicators rotate and titles shift 8px during disclosure. Reduced motion disables entry, reveals, animated expansion, transitions, and smooth scrolling. Focus and color contrast target WCAG AA. The entrance adds finite and interaction-driven portrait motion; the portfolio has no idle animation, custom cursor, scroll hijacking, or backend.
