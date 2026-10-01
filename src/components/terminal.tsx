@@ -36,7 +36,7 @@ export function Terminal({ destinations, name, role }: {
     <div ref={outputRef} className="terminal-output" role="log" aria-label="Terminal output" aria-live="polite" tabIndex={0}>
       {output.length ? output.map((entry, index) => <pre key={index}>{entry}</pre>) : <p>Output cleared. Type help to start.</p>}
     </div>
-    <form onSubmit={submit} className="terminal-form js-control">
+    <form noValidate onSubmit={submit} className="terminal-form js-control">
       <label className="sr-only" htmlFor="terminal-command">Terminal command</label>
       <div className="command-field"><span aria-hidden="true">$</span><input id="terminal-command" value={command} onChange={event => setCommand(event.target.value)} placeholder="Type a command…" autoComplete="off" spellCheck={false} maxLength={80} /></div>
       <button type="submit" disabled={!command.trim()}>Run</button>

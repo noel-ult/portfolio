@@ -28,7 +28,7 @@ export default function Home() {
     <div className="page-shell" id="top">
       <SiteHeader name={name} destinations={nav} />
       <PageMotion />
-      {profile.photo ? <EntryIntro name={name} photo={profile.photo} location={profile.location} notes={projects.flatMap(project => project.entryNote ? [{ thought: project.entryNote.thought, project: project.entryNote.label ?? project.title }] : [])} /> : null}
+      <EntryIntro name={name} location={profile.location} notes={projects.flatMap(project => project.entryNote ? [{ thought: project.entryNote.thought, project: project.entryNote.label ?? project.title, symbol: project.entryNote.symbol }] : [])} />
       <main id="main" tabIndex={-1}>
         <section className="intro" aria-labelledby="intro-heading">
           <ArtworkStage />
