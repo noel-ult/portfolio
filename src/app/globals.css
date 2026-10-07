@@ -39,6 +39,7 @@ a:active, button:active:not(:disabled) { opacity: .75; }
 p, h1, h2, h3, h4 { margin: 0; }
 p, h1, h2, h3, h4, a, li { overflow-wrap: anywhere; }
 button { font: inherit; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 .page-shell { position: relative; width: 100%; }
 .skip-link { position: fixed; top: 12px; left: 12px; z-index: 50; padding: 10px 18px; background: var(--accent); color: var(--paper); transform: translateY(-180%); }
 .skip-link:focus { transform: translateY(0); }
@@ -155,14 +156,15 @@ html[data-entry="boot"] .entry-intro, html[data-entry="active"] .entry-intro { d
 .projects-pending p:last-child { max-width: 470px; }
 .project-story { padding-block: 32px; border-top: 1px solid var(--line); }
 .project-heading { display: flex; gap: 24px; align-items: baseline; justify-content: space-between; transition: transform 360ms var(--ease); }
-.project-heading h3 { font: 800 clamp(42px, 5.5vw, 84px)/1.05 var(--display-font); color: var(--ink); letter-spacing: -.02em; text-transform: uppercase; }
+.project-heading :is(h3, .project-title) { font: 800 clamp(42px, 5.5vw, 84px)/1.05 var(--display-font); color: var(--ink); letter-spacing: -.02em; text-transform: uppercase; }
 .project-toggle { flex-shrink: 0; color: var(--accent); font: 300 36px/1 var(--body-font); transition: transform 360ms var(--ease); }
 .project-story details[open] .project-toggle { transform: rotate(45deg); }
 .project-story details[open] .project-heading { transform: translateX(8px); }
 .project-story summary { list-style: none; }
 .project-story summary::-webkit-details-marker { display: none; }
-.project-story summary:is(:hover,:focus-visible) h3 { color: var(--accent); }
+.project-story summary:is(:hover,:focus-visible) .project-title { color: var(--accent); }
 .project-introduction { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 24px; font-size: 17px; max-width: 1050px; }
+.project-summary, .project-contribution { display: block; }
 .project-contribution span { display: block; color: var(--ink); font: 11px/1.5 var(--mono-font); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 8px; }
 .story-prompt { display: block; font-size: 12px; color: var(--ink); margin-top: 22px; padding-bottom: 24px; }
 .when-open { display: none; }
@@ -175,7 +177,7 @@ html[data-entry="boot"] .entry-intro, html[data-entry="active"] .entry-intro { d
 .project-links:empty { display: none; }
 .project-links { margin-top: 12px; }
 .project-story.has-showcase { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.12fr); gap: clamp(32px, 5vw, 80px); padding-block: 48px; align-items: start; }
-.has-showcase .project-heading h3 { font-size: clamp(42px, 4.8vw, 70px); }
+.has-showcase .project-heading :is(h3, .project-title) { font-size: clamp(42px, 4.8vw, 70px); }
 .has-showcase .project-introduction, .has-showcase .story-body { grid-template-columns: 1fr; gap: 20px; }
 .project-copy, .project-preview { min-width: 0; }
 .preview-caption { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 16px; margin-bottom: 14px; font: 10px/1.5 var(--mono-font); text-transform: uppercase; letter-spacing: .06em; }
@@ -309,7 +311,7 @@ html[data-entry="boot"] .entry-intro, html[data-entry="active"] .entry-intro { d
   .projects-pending h3 { font-size: 30px; margin-top: 12px; }
   .projects-pending p:last-child { font-size: 16px; }
   .project-introduction, .story-body { grid-template-columns: 1fr; gap: 20px; }
-  .project-heading h3 { font-size: 48px; }
+  .project-heading :is(h3, .project-title) { font-size: 48px; }
   .background-grid { grid-template-columns: 1fr; gap: 50px; padding-block: 55px 65px; }
   .background-grid h2 { margin-bottom: 24px; }
   #contact { grid-template-columns: 1fr; gap: 42px; padding-block: 60px 65px; }

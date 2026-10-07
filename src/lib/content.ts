@@ -30,5 +30,13 @@ export function chronological<T extends { startDate?: string; endDate?: string }
 }
 
 export function dateRange(start?: string, end?: string) {
-  return [start, end].filter(Boolean).join(" — ");
+  const displayDate = (value: string) => {
+    const parts = /^(\d{4})-(\d{2})$/.exec(value);
+    if (!parts) return value;
+    const month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][Number(parts[2]) - 1];
+    return month ? `${month} ${parts[1]}` : value;
+  };
+  if (!start) return end ? displayDate(end) : "";
+  if (!end || end === start) return displayDate(start);
+  return `${displayDate(start)} — ${displayDate(end)}`;
 }

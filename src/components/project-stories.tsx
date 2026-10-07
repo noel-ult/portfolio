@@ -44,15 +44,18 @@ function ProjectStory({ project, initiallyOpen }: { project: Project; initiallyO
   const parts = [["The problem", project.problem], ["The approach", project.approach], ["Outcome & lessons", project.outcome]].filter(([, value]) => value?.trim());
   const technologies = project.technologies?.filter(value => value.trim()) ?? [];
   const hasStory = parts.length > 0 || technologies.length > 0;
-  const title = <div className="project-heading"><h3>{project.title}</h3>{hasStory ? <span className="project-toggle" aria-hidden="true">+</span> : null}</div>;
+  const headingId = `project-${project.id}`;
+  const title = <div className="project-heading"><h3 id={headingId}>{project.title}</h3>{hasStory ? <span className="project-toggle" aria-hidden="true">+</span> : null}</div>;
   const introduction = <div className="project-introduction">{project.summary ? <p>{project.summary}</p> : null}{project.contribution?.trim() ? <p className="project-contribution"><span>My contribution</span>{project.contribution}</p> : null}</div>;
-  return <article className={`project-story${project.preview ? " has-showcase" : ""}`}>
+  const disclosureTitle = <span className="project-heading"><span className="project-title" aria-hidden="true">{project.title}</span><span className="project-toggle" aria-hidden="true">+</span></span>;
+  const disclosureIntroduction = <span className="project-introduction">{project.summary ? <span className="project-summary">{project.summary}</span> : null}{project.contribution?.trim() ? <span className="project-contribution"><span className="project-contribution-label">My contribution</span>{project.contribution}</span> : null}</span>;
+  return <article className={`project-story${project.preview ? " has-showcase" : ""}`} aria-labelledby={headingId}>
     <div className="project-copy">
     {project.status || project.date ? <p className="entry-meta">{[project.status, project.date].filter(Boolean).join(" · ")}</p> : null}
-    {hasStory ? <details ref={details} open={initiallyOpen}>
-      <summary>{title}{introduction}<span className="story-prompt" aria-hidden="true"><span className="when-closed">Read project story</span><span className="when-open">Close project story</span></span></summary>
+    {hasStory ? <><h3 id={headingId} className="visually-hidden">{project.title}</h3><details ref={details} open={initiallyOpen}>
+      <summary aria-labelledby={headingId}>{disclosureTitle}{disclosureIntroduction}<span className="story-prompt" aria-hidden="true"><span className="when-closed">Read project story</span><span className="when-open">Close project story</span></span></summary>
       <div className="story-body">{parts.map(([label, value]) => <div className="story-detail" key={label}><h4>{label}</h4><p>{value}</p></div>)}{technologies.length ? <div className="story-detail"><h4>Built with</h4><ul className="tag-list">{technologies.map((technology, index) => <li key={`${technology}-${index}`}>{technology}</li>)}</ul></div> : null}</div>
-    </details> : <>{title}{introduction}</>}
+    </details></> : <>{title}{introduction}</>}
     <div className="project-links"><TextLinks links={project.links} /></div>
     </div>
     {project.preview ? <ProjectPreview kind={project.preview} /> : null}

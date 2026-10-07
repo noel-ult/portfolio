@@ -9,6 +9,9 @@ const OPEN_DURATION = 1100;
 const RUSH_DURATION = 1200;
 const RUSH_HOLD = 260;
 const TAP_THRESHOLD = 8;
+// The story completes in just under four seconds. Keep the interaction available,
+// but never let it trap visitors or rendered crawlers behind the overlay.
+const IDLE_EXIT_DELAY = 4300;
 type EntryNote = { thought: string; project: string; symbol: "hand" | "change" };
 
 export function EntryIntro({ name, location, notes }: {
@@ -51,6 +54,7 @@ export function EntryIntro({ name, location, notes }: {
     let openingAt = 0;
     let previousTime = 0;
     let cleanupTimer: ReturnType<typeof setTimeout> | undefined;
+    let idleExitTimer: ReturnType<typeof setTimeout> | undefined;
     let renderer: ReturnType<typeof createEntryThread> = null;
     let pointer: { id: number; x: number; y: number } | undefined;
     let suppressClick = false;
@@ -65,6 +69,7 @@ export function EntryIntro({ name, location, notes }: {
       if (finished) return;
       finished = true;
       clearTimeout(cleanupTimer);
+      clearTimeout(idleExitTimer);
       clearTimeout(frameFallback);
       cancelAnimationFrame(frame);
       frame = 0;
@@ -145,6 +150,7 @@ export function EntryIntro({ name, location, notes }: {
     enterRef.current = detail => {
       // A tap during the hand still shows the project change and the name.
       if (!active || finished || opening || rushing || !renderer || (detail > 0 && suppressClick)) return;
+      clearTimeout(idleExitTimer);
       const elapsed = performance.now() - startedAt;
       if (elapsed < 3900) {
         rushing = true;
@@ -184,6 +190,9 @@ export function EntryIntro({ name, location, notes }: {
         renderer.draw(startedAt, 16);
         surface.focus({ preventScroll: true });
         wake();
+        idleExitTimer = setTimeout(() => {
+          if (!finished && active && !rushing && !opening) startOpening();
+        }, IDLE_EXIT_DELAY);
         if (earlyEntryRequested) enterRef.current(0);
       } catch { finish(active, active); }
     };
