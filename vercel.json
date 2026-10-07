@@ -6,6 +6,12 @@
   "outputDirectory": ".next",
   "redirects": [
     {
+      "source": "/",
+      "has": [{ "type": "host", "value": "portfolio-three-puce-77\\.vercel\\.app" }],
+      "destination": "https://noelbiju.in/",
+      "permanent": true
+    },
+    {
       "source": "/:path*",
       "has": [{ "type": "host", "value": "portfolio-three-puce-77\\.vercel\\.app" }],
       "destination": "https://noelbiju.in/:path*",
