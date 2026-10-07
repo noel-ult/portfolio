@@ -3,5 +3,18 @@
   "framework": "nextjs",
   "installCommand": "npm ci",
   "buildCommand": "npm run build",
-  "outputDirectory": ".next"
+  "outputDirectory": ".next",
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "portfolio-three-puce-77\\.vercel\\.app" }],
+      "destination": "https://noelbiju.in/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/opengraph-image",
+      "destination": "https://noelbiju.in/profile/noel-biju.webp",
+      "permanent": true
+    }
+  ]
 }
