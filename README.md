@@ -1,5 +1,10 @@
 # Personal portfolio
 
+<!-- documentation-navigation -->
+[Developer guide](docs/PROJECT_GUIDE.md) · [Source reference](docs/REFERENCE.md) · [Contributing](CONTRIBUTING.md)
+<!-- /documentation-navigation -->
+
+
 A static single-page portfolio built with Next.js App Router, React, TypeScript, and Tailwind CSS. The brief is in `PORTFOLIO_REQUIREMENTS.md`.
 
 ## Run
