@@ -17,7 +17,7 @@ export function createEntryThread(root: HTMLElement) {
   const width = root.clientWidth;
   const height = root.clientHeight;
   const narrow = width <= 760;
-  const scale = Math.min(width * (narrow ? .95 : .88) / 1000, height * .64 / 560);
+  const scale = Math.min(width * .88 / 1000, height * .64 / 560);
   const origin = { x: (width - 1000 * scale) / 2, y: height * .45 - 280 * scale };
   svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
   const sample = (selector: string, hand = false) => {

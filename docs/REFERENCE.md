@@ -1,69 +1,27 @@
-# portfolio source reference
+# Source and configuration reference
 
+## Commands
 
-Source reviewed: [`e79d8287c42e`](https://github.com/noel-ult/portfolio/commit/e79d8287c42e52f66de2be7781d240fc6b12f50b).
+- `npm run dev`: Next.js development server, webpack.
+- `npm run build`: production build and incremental regeneration artifacts.
+- `npm start`: standard Next.js production server.
+- `npm test`: Node 24 TypeScript contract tests for public GitHub data.
+- `npm run test:e2e`: Playwright Chromium desktop/mobile regression tests against a production build, or `PLAYWRIGHT_BASE_URL`.
+- `npm run lint`: ESLint.
+- `npm run typecheck`: TypeScript using generated Next.js route types.
 
-This reference records the checked-in source, scripts, configuration names, and route declarations. It is a navigation aid; service availability and successful test execution require separate verification.
+## Interfaces
 
-## Package commands
+`GitHubRepository` contains public identity, name, source/homepage, primary language, topics, stars, last push date and default branch. `normalizeRepositories` validates and filters API pages; `loadRepositoryPages` consumes every linked page before returning a complete result. `CatalogProject` combines repository facts with the approved `Project` story, slug and featured status. `getProjectCatalog` returns projects, featured projects, actual sync date and `github`/`snapshot` source. `getProject` accepts a slug and can match a preserved repository ID after a rename. `getReadme` returns bounded public markdown or null.
 
-Run each command in the directory containing its package manifest. A declared script is not necessarily a passing check; guides call out placeholders and known mismatches.
+A server-only `GITHUB_TOKEN` is optional. `GITHUB_OWNER` is fixed to `noel-ult`; API origins and allowed repository paths cannot be supplied by visitors. Public API pagination is bounded at 20 pages and requests have a 10-second timeout. README traffic uses five parallel workers and one-hour successful-result caching. An HTTP failure is not an empty success.
 
-### package.json
+`pageMetadata` emits page-specific canonical, robots and social metadata. `StructuredData` escapes less-than signs before emitting JSON-LD. README uses `react-markdown` and `remark-gfm`, disables raw HTML, resolves repository-relative links, rejects unsafe schemes/credentials and converts images to links.
 
-| Script | Shell command |
-| --- | --- |
-| `dev` | `next dev --webpack` |
-| `build` | `next build --webpack` |
-| `start` | `serve out -l 3000` |
-| `lint` | `eslint .` |
-| `typecheck` | `tsc --noEmit` |
+## Routes and components
 
-Manifest: [package.json](../package.json).
+`(site)/layout.tsx` shares header, main landmark, footer and finite heading motion. The route-aware header owns active-page navigation. Home preserves the supplied photograph, hero and featured previews. Projects owns the library; its native language select intentionally uses the platform popup. Search/filter URL state uses native history and subscribes to back/forward changes. Client updates are local and do not issue GitHub requests.
 
-## File-based pages and handlers
+`enter/page.tsx` and `EntryIntro` isolate the original continuous-line art. The server renders an actionable full-surface link. Animation owns only this route, including finite drawing and explicit exit. Reduced motion uses a static path. No global gate or automatic timer-to-home exists.
 
-- [src/app/page.tsx](../src/app/page.tsx)
-
-## Existing documentation
-
-Historical plans/reports describe their own revision; use current source when they disagree.
-
-- [AGENTS.md](../AGENTS.md)
-- [CLAUDE.md](../CLAUDE.md)
-- [DESIGN.md](../DESIGN.md)
-- [IMPLEMENTATION_PLAN.md](../IMPLEMENTATION_PLAN.md)
-- [PORTFOLIO_REQUIREMENTS.md](../PORTFOLIO_REQUIREMENTS.md)
-- [README.md](../README.md)
-
-## Source and configuration map
-
-Generated lockfiles, binary assets, compiled output, vendored dependencies, and cached bytecode are omitted. Test files remain listed so coverage can be located.
-
-- [.env.example](../.env.example)
-- [eslint.config.mjs](../eslint.config.mjs)
-- [next-env.d.ts](../next-env.d.ts)
-- [next.config.ts](../next.config.ts)
-- [package.json](../package.json)
-- [postcss.config.mjs](../postcss.config.mjs)
-- [src/app/globals.css](../src/app/globals.css)
-- [src/app/layout.tsx](../src/app/layout.tsx)
-- [src/app/page.tsx](../src/app/page.tsx)
-- [src/app/robots.ts](../src/app/robots.ts)
-- [src/app/sitemap.ts](../src/app/sitemap.ts)
-- [src/components/artwork-stage.tsx](../src/components/artwork-stage.tsx)
-- [src/components/console-drawer.tsx](../src/components/console-drawer.tsx)
-- [src/components/entry-intro.tsx](../src/components/entry-intro.tsx)
-- [src/components/entry-thread-art.tsx](../src/components/entry-thread-art.tsx)
-- [src/components/page-motion.tsx](../src/components/page-motion.tsx)
-- [src/components/portfolio.tsx](../src/components/portfolio.tsx)
-- [src/components/project-preview.tsx](../src/components/project-preview.tsx)
-- [src/components/project-stories.tsx](../src/components/project-stories.tsx)
-- [src/components/site-header.tsx](../src/components/site-header.tsx)
-- [src/components/terminal.tsx](../src/components/terminal.tsx)
-- [src/content/portfolio.ts](../src/content/portfolio.ts)
-- [src/lib/content.ts](../src/lib/content.ts)
-- [src/lib/entry-thread.ts](../src/lib/entry-thread.ts)
-- [src/lib/site.ts](../src/lib/site.ts)
-- [tsconfig.json](../tsconfig.json)
-- [vercel.json](../vercel.json)
+`next.config.ts` uses default Next.js runtime behavior. `vercel.json` configures headers and specific legacy redirects, with no static-output override. `src/lib/site.ts` is the canonical production origin; `sitemap.ts` renders from the same hourly catalog cache as the project library. Every project route renders on demand from the same validated cache, including newly discovered repositories.

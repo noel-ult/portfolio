@@ -1,80 +1,61 @@
-# Personal portfolio
+# Noel Biju’s portfolio
 
-<!-- documentation-navigation -->
-[Developer guide](docs/PROJECT_GUIDE.md) · [Source reference](docs/REFERENCE.md) · [Contributing](CONTRIBUTING.md)
-<!-- /documentation-navigation -->
+A Next.js App Router portfolio at **https://noelbiju.in**. Personal information and selected project stories are curated; the public project library refreshes from GitHub without rebuilding the site.
 
+## Run locally
 
-A static single-page portfolio built with Next.js App Router, React, TypeScript, and Tailwind CSS. The brief is in `PORTFOLIO_REQUIREMENTS.md`.
-
-## Run
-
-Use Node.js 24, matching the Vercel build runtime and `.nvmrc`.
+Use Node.js 24 and npm:
 
 ```sh
 npm ci
 npm run dev
 ```
 
-Open http://localhost:3000. Production preview:
+For production, run `npm run build` followed by `npm start`. The production server uses `next start`, not a static `out/` directory. Vercel detects the Next.js framework automatically.
+
+## Pages
+
+| Route | Purpose |
+| --- | --- |
+| `/` | Directly accessible portfolio homepage and featured projects |
+| `/enter` | Optional, deliberate tap/click/keyboard entrance |
+| `/about` | Biography, skills, education, recognition, résumé |
+| `/projects` | Featured previews and searchable GitHub library |
+| `/projects/[slug]` | Project stories, repository metadata and safely rendered README |
+| `/experience` | Internship and selected student work |
+| `/contact` | Email, social links, availability and résumé |
+
+The entrance is not mounted on content pages. It holds its final drawing until a visitor clicks, taps, or activates its full-surface link with the keyboard. Drag, wheel, resize, visibility changes, timers and storage do not enter. Reduced motion keeps a static, actionable entrance. Without JavaScript, the link still leads home. `/?intro=1` redirects to `/enter` for old replay links.
+
+## GitHub sync
+
+`src/lib/github.ts` fetches public repositories for `noel-ult` on the server, validates complete pagination, and caches successful results for one hour. The next visit after expiry triggers background revalidation; it is not a scheduled job and does not update an already-open tab. New eligible repositories can appear and receive project pages without deployment.
+
+Only public, non-forked, non-archived repositories with content are included; the portfolio and GitHub profile repository are excluded. Most recently pushed code sorts first. GitHub supplies current names, language, topics, stars, homepage, source URL, README and push date. Missing descriptions use a factual README excerpt. PageRadar and Choru Vaari retain their curated stories and labelled sample previews. Personal details and verified contributions stay in `src/content/portfolio.ts`; repository IDs join curated projects to live data so renames do not lose the editorial story. Non-curated URLs contain the stable repository ID and redirect to the latest slug after a rename.
+
+Failed refreshes do not replace cached successful results. `src/content/github-snapshot.json` supplies a bundled public fallback when GitHub is unreachable on a cold cache. The UI distinguishes a fallback snapshot from a live sync. No secrets or private repository fields enter the client bundle. README HTML is disabled, unsafe URL schemes are rejected, and external README images are linked instead of embedded.
+
+An optional **server-only** `GITHUB_TOKEN` raises API rate limits. Public anonymous access works without it. Configure it in Vercel’s environment settings if needed; never use a `NEXT_PUBLIC_` name or commit the value. `.env.example` documents this optional setting. New repository discovery, descriptions and README retrieval share the same cache rather than polling per visitor.
+
+## SEO and hosting
+
+`https://noelbiju.in` is the fixed canonical origin. Each content route has its own title, description, canonical and share metadata. The homepage and all content render without an entrance gate. Person/ProfilePage, project collection and breadcrumb structured data describe real content. Robots allows crawling; `/enter` is `noindex, follow` and is omitted from the sitemap. The hourly sitemap lists canonical content and project URLs, using real GitHub push dates for repository modifications. Search/filter query variants canonicalize to `/projects`.
+
+Vercel preserves permanent redirects from the old production hostname and `/opengraph-image`. Retired search, GitHub, certificates, now and journal URLs redirect to matching project, biography or experience content. `/journal/lessons-etlab-plus` permanently redirects to `/projects/etlab-plus`. Unknown pages and retired content without a matching replacement remain 404s. Baseline response headers protect content types, framing, referrers, and unused permissions.
+
+## Verify
 
 ```sh
-npm run build
-npm start
-```
-
-The `out/` directory can be deployed to a static host. No backend, analytics, contact service, or runtime credentials are needed. Static output follows the [Next.js static export guide](https://nextjs.org/docs/app/guides/static-exports); styling uses the [Tailwind PostCSS integration](https://tailwindcss.com/docs/installation/framework-guides/nextjs).
-
-## Deploy on Vercel
-
-Import `noel-ult/portfolio` into Vercel or redeploy its existing connected project. Use production branch `main` and repository root `.`. The committed `vercel.json` sets the Next.js framework, `npm ci` install command, `npm run build` build command, and `.next` framework output directory. Vercel’s Next.js adapter reads the build manifests there and automatically collects the static export from `out`; do not set its framework output directory to `out`. `package.json` selects Node.js 24. No environment variables are required.
-
-`https://noelbiju.in` is the fixed production URL. Canonical metadata, robots, sitemap, and social URLs always use that domain. Vercel permanently redirects the production `portfolio-three-puce-77.vercel.app` hostname to it while preserving each path and query string. The page includes a favicon, canonical URL, social metadata, and static `robots.txt` and `sitemap.xml`. Search indexing is enabled following the owner’s publication request.
-
-Build configuration follows [Vercel’s project configuration](https://vercel.com/docs/project-configuration/vercel-json). Never upload `node_modules`, `.next`, `out`, `.vercel`, or local environment files to GitHub. The lockfile is committed for reproducible installs; Vercel builds the export itself. Future pushes to the connected production branch trigger Vercel’s Git deployment flow.
-
-## Add your content
-
-Edit **`src/content/portfolio.ts`**. It contains the profile, skills, projects, experience, education, achievements, and contact information, plus the clearly labeled preview copy. The TypeScript types describe all supported fields.
-
-- Replace name, role, introduction, and biography with approved public information.
-- List projects in the order you want them featured. Titles, summaries, and contributions appear in a vertical list; native disclosures reveal complete project stories. The first project begins expanded.
-- Use `YYYY-MM` or `YYYY-MM-DD` dates. Experience and education sort by start date, most recent first. Omit dates you do not know; unknown dates retain their relative order after dated entries.
-- Leave unavailable arrays empty and optional values absent. Skills, education, and achievements appear only when populated.
-- In preview mode, Projects and Experience show explicit instructions for missing content. After preview mode is disabled, empty collections and their navigation links are omitted together. This reconciles the brief’s navigation requirement with its instruction to hide empty optional sections.
-- Supply public HTTPS links. For a local résumé, place the file in `public/` and use a root-relative path, for example `/resume.pdf`. Ensure the file exists. Invalid links and email addresses are hidden. Links use the current tab.
-- Use `contact.email` and `contact.links` for real contact methods. No contact form is included.
-
-## Before publishing
-
-Replace all placeholders, review all claims and public links, then set `publication.hasPlaceholders` to `false`. Only after the owner approves the complete content, set `publication.contentApproved` to `true`.
-
-Until both conditions are met, metadata uses `noindex, nofollow`. A neutral preview title appears while placeholders remain; populated content uses the owner's name. Remaining `[Your ...]` markers also prevent indexing. Do not add secret or private information to the content file; static output is public. The copyright year is captured at build time, so rebuild when the year changes.
-
-The current profile is populated from Noel Biju’s supplied résumé. GitHub links point to `noel-ult` and verified public project sources; LinkedIn points to the supplied profile. The exact résumé is served at `/documents/noel-biju-resume.pdf`. The supplied photograph is optimized as `/profile/noel-biju.webp` and appears in the hero and About section. Profile updates remain local to this content file; the site does not require GitHub credentials or fetch repository data at runtime.
-
-## Project showcases
-
-PageRadar and Choru Vaari Kodukkam are featured first, with compact interactive previews. Set a project's optional `preview` to `"pageradar"` or `"choru-vaari"` in the content file to show its interface. Other projects keep the existing text layout.
-
-The PageRadar preview uses sample updates from its [public demo source](https://github.com/noel-ult/PageRadar/blob/main/app/demo/page.tsx). The Choru Vaari preview uses example inputs and the ratio/verdict logic from its [calculator](https://github.com/noel-ult/chooru-varal/blob/main/lib/calculations/vaariCalculator.ts). Both run locally in the portfolio; they do not connect to monitoring services, cameras, or image analysis. Project descriptions and contributions are based on the public repositories’ documentation. Source links open the full repositories. Choru Vaari's repository homepage returned HTTP 404 during verification, so that deployment link is omitted.
-
-## Checks
-
-```sh
+npm test
 npm run lint
 npm run typecheck
 npm run build
+npm run test:e2e
+npm audit --omit=dev
 ```
 
-The page uses semantic landmarks, a skip link, native anchors and keyboard-accessible project disclosures, visible focus rings, responsive layouts, and reduced-motion support. Navigation and complete project notes remain available without JavaScript.
+Tests cover repository eligibility and sorting, pagination and failures, README extraction, stable identities and safe links. `npm run test:e2e` starts the production build on port 3100 and runs Chromium desktop/mobile checks, including the 30-second untouched entrance, deliberate activation, drag suppression, reduced motion, library filters, browser history, direct routes and no-JavaScript behavior. Install Chromium once with `npx playwright install chromium`; set `PLAYWRIGHT_BASE_URL` to test an already running deployment instead. Browser QA must also check project previews, canonical/sitemap/404 behavior, and console/network health. Run type checking after the build has generated route types; avoid running the build and type checker simultaneously.
 
-`DESIGN.md` records the visual direction and its mapping to CSS tokens.
+The interactive project previews use sample data and local calculation controls; they do not monitor sites or access a camera. Photo and résumé were supplied by Noel. Locally bundled fonts and existing artwork preserve the established identity. `DESIGN.md` records the shared visual and navigation contract.
 
-## Motion
-
-Afterimage uses CSS 3D transforms and the Web Animations API with no animation dependency. The entrance is an impossible typographic room: pointer movement or touch dragging changes the perspective of its ivory and ember planes. Enter portfolio unfolds the walls and expands the doorway over 1.45 seconds; Skip intro, Escape, or wheel navigation immediately reveals the page. It waits for deliberate entry, runs once per tab session, and bypasses section links, restored scroll positions, reduced motion, forced colors, and failed initialization. Interaction animation stops when the room settles. Blocked session storage does not prevent navigation. Project stories animate inline, and the header identifies the current section after scrolling.
-
-## Artwork
-
-The hero uses the empty dark studio background in `public/art/studio-atmosphere.webp`. The mechanical sculpture, stone slab, and sculpture controls have been removed from the page. Fonts are bundled locally. Background PNGs and their image-edit prompts are retained in `public/art/`.
+More details: [Maintenance guide](docs/PROJECT_GUIDE.md), [Source reference](docs/REFERENCE.md), and [Contributing](CONTRIBUTING.md).

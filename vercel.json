@@ -3,7 +3,6 @@
   "framework": "nextjs",
   "installCommand": "npm ci",
   "buildCommand": "npm run build",
-  "outputDirectory": ".next",
   "headers": [
     {
       "source": "/(.*)",
@@ -16,6 +15,24 @@
     }
   ],
   "redirects": [
+    { "source": "/search", "destination": "/projects", "permanent": true },
+    { "source": "/github", "destination": "/projects", "permanent": true },
+    { "source": "/now", "destination": "/about", "permanent": true },
+    { "source": "/certificates", "destination": "/about#recognition-heading", "permanent": true },
+    { "source": "/journal", "destination": "/projects", "permanent": true },
+    { "source": "/journal/offline-llm-ollama", "destination": "/projects/local-ai-assistant", "permanent": true },
+    { "source": "/journal/robotics-internship-ieee", "destination": "/experience", "permanent": true },
+    {
+      "source": "/journal/lessons-etlab-plus",
+      "destination": "/projects/etlab-plus",
+      "permanent": true
+    },
+    {
+      "source": "/",
+      "has": [{ "type": "query", "key": "intro", "value": "1" }],
+      "destination": "/enter",
+      "permanent": false
+    },
     {
       "source": "/",
       "has": [{ "type": "host", "value": "portfolio-three-puce-77\\.vercel\\.app" }],
