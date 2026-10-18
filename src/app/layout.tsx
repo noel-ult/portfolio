@@ -16,5 +16,5 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en"><body>{children}</body></html>;
+  return <html lang="en"><head><noscript><style>{`.homepage-entrance{display:none!important}.entrance-content{visibility:visible!important}html:has(.homepage-entrance){overflow:auto!important}`}</style></noscript></head><body>{children}</body></html>;
 }
