@@ -17,7 +17,7 @@ For production, run `npm run build` followed by `npm start`. The production serv
 
 | Route | Purpose |
 | --- | --- |
-| `/` | Directly accessible portfolio homepage and featured projects |
+| `/` | Tap-to-enter animation, then portfolio homepage and featured projects |
 | `/enter` | Optional, deliberate tap/click/keyboard entrance |
 | `/about` | Biography, skills, education, recognition, résumé |
 | `/projects` | Featured previews and searchable GitHub library |
@@ -25,7 +25,7 @@ For production, run `npm run build` followed by `npm start`. The production serv
 | `/experience` | Internship and selected student work |
 | `/contact` | Email, social links, availability and résumé |
 
-The entrance is not mounted on content pages. It holds its final drawing until a visitor clicks, taps, or activates its full-surface link with the keyboard. Drag, wheel, resize, visibility changes, timers and storage do not enter. Reduced motion keeps a static, actionable entrance. Without JavaScript, the link still leads home. `/?intro=1` redirects to `/enter` for old replay links.
+Every fresh homepage visit starts with the entrance, server-rendered to prevent a portfolio flash before hydration. A deliberate activation reveals the portfolio in place, releases background controls and focuses main content. No seen flag persists across visits. Other content routes open directly. It holds its final drawing until a visitor clicks, taps, or activates its full-surface button with the keyboard. Drag, wheel, resize, visibility changes, timers and storage do not enter. Reduced motion keeps a static, actionable entrance. Without JavaScript, the homepage content is directly accessible. The /enter replay link hands off to the homepage without playing twice. `/?intro=1` redirects to `/enter` for old replay links.
 
 ## GitHub sync
 
@@ -39,7 +39,7 @@ An optional **server-only** `GITHUB_TOKEN` raises API rate limits. Public anonym
 
 ## SEO and hosting
 
-`https://noelbiju.in` is the fixed canonical origin. Each content route has its own title, description, canonical and share metadata. The homepage and all content render without an entrance gate. Person/ProfilePage, project collection and breadcrumb structured data describe real content. Robots allows crawling; `/enter` is `noindex, follow` and is omitted from the sitemap. The hourly sitemap lists canonical content and project URLs, using real GitHub push dates for repository modifications. Search/filter query variants canonicalize to `/projects`.
+`https://noelbiju.in` is the fixed canonical origin. Each content route has its own title, description, canonical and share metadata. Homepage content remains in the initial HTML beneath its entrance overlay; other content routes open directly. Person/ProfilePage, project collection and breadcrumb structured data describe real content. Robots allows crawling; `/enter` is `noindex, follow` and is omitted from the sitemap. The hourly sitemap lists canonical content and project URLs, using real GitHub push dates for repository modifications. Search/filter query variants canonicalize to `/projects`.
 
 Vercel preserves permanent redirects from the old production hostname and `/opengraph-image`. Retired search, GitHub, certificates, now and journal URLs redirect to matching project, biography or experience content. `/journal/lessons-etlab-plus` permanently redirects to `/projects/etlab-plus`. Unknown pages and retired content without a matching replacement remain 404s. Baseline response headers protect content types, framing, referrers, and unused permissions.
 

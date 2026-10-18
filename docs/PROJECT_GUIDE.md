@@ -7,7 +7,7 @@ Use Node.js 24. Run `npm ci`, `npm run dev`; run `npm run build` then `npm start
 - `src/content/portfolio.ts` owns approved personal facts, selected project stories, résumé/social URLs and immutable GitHub repository IDs for curated work.
 - `src/lib/github.ts` owns server-only GitHub requests, one-hour caching, pagination, complete-result validation and snapshot fallback. `github-model.ts` owns pure validation, eligibility, slug and safe-text/link helpers. `src/content/github-snapshot.json` is the verified public cold-cache fallback.
 - `src/app/(site)` owns crawlable content routes and the shared shell. New GitHub projects render on demand at `/projects/[slug]`; curated stories stay available from local content.
-- `/enter` owns the entrance. Its component never appears on content routes and never navigates without an explicit activation. No sessionStorage gate, global bootstrap, or idle release belongs in the root layout.
+- `HomeEntrance` owns the homepage overlay and background inert/focus behavior; `EntryIntro` owns the shared drawing and explicit activation. Fresh loads and return visits to Home replay it. `/enter` hands off through one-navigation memory to avoid playing twice. No sessionStorage seen flag or idle release belongs in this flow.
 - Shared CSS tokens remain in `src/app/globals.css`; `DESIGN.md` explains the identity and native control decisions.
 
 ## GitHub operations
@@ -20,9 +20,9 @@ To update the fallback, fetch all public repository pages, normalize them with `
 
 Run `npm test`, lint, a production build, then type checking and `npm run test:e2e`. The browser suite needs Playwright Chromium (`npx playwright install chromium`) and starts the built app on port 3100 unless `PLAYWRIGHT_BASE_URL` is set. Inspect desktop and mobile renderings and verify:
 
-- `/enter` stays on the entrance after 30 seconds, drag, wheel, resize and backgrounding; tap/click/Enter/Space enters once.
+- `/` and `/enter` stay on the entrance after 30 seconds, drag, wheel, resize and backgrounding; tap/click/Enter/Space enters once. The homepage reveals in place, restores focus, and replays on reload or returning Home.
 - Reduced motion remains static and actionable; no-JavaScript navigation works.
-- `/`, About, Projects, Experience, Contact and project URLs work directly and through links.
+- Homepage content remains server-rendered and accessible without JavaScript. About, Projects, Experience, Contact and project URLs open directly and through links.
 - Search, language, clear, load-more, URL restoration, native select keyboard behavior, disclosure and both previews work.
 - No console exceptions, horizontal overflow, invalid HTML, incorrect canonicals, broken assets, or accidental overlay/inert content.
 - GitHub unavailable/rate-limited responses retain good data or use the labelled fallback.

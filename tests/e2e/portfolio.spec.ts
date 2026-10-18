@@ -1,5 +1,51 @@
 import { expect, test } from "@playwright/test";
 
+test("homepage entrance covers the portfolio before JavaScript loads", async ({ page }) => {
+  let release!: () => void;
+  const scriptsReady = new Promise<void>(resolve => { release = resolve; });
+  await page.route(/\/_next\/static\/.*\.js(?:\?|$)/, async route => {
+    await scriptsReady;
+    await route.continue();
+  });
+  try {
+    await page.goto("/", { waitUntil: "commit" });
+    await expect(page.locator(".homepage-entrance")).toBeVisible();
+    await expect(page.locator("#intro-heading")).not.toBeVisible();
+    await expect(page.locator("#intro-heading")).toHaveText("Noel Biju");
+  } finally { release(); }
+  await expect(page.locator(".entry-intro")).toHaveAttribute("data-state", "exploring");
+});
+
+test("homepage entrance waits for activation, reveals in place and replays on a fresh visit", async ({ page }) => {
+  const errors: string[] = [];
+  page.on("pageerror", error => errors.push(error.message));
+  await page.goto("/");
+  await expect(page.getByRole("dialog", { name: "Noel Biju", exact: true })).toBeVisible();
+  await expect(page.locator(".entrance-content")).toHaveAttribute("inert", "");
+  await expect(page.locator("#intro-heading")).not.toBeVisible();
+  await expect(page.locator(".entry-intro")).toHaveAttribute("data-chapter", "name", { timeout: 10000 });
+  await page.waitForTimeout(30000);
+  await expect(page.locator(".homepage-entrance")).toBeVisible();
+  await page.getByRole("button", { name: "Enter Noel Biju’s portfolio" }).click({ position: { x: 150, y: 300 } });
+  await expect(page.locator(".homepage-entrance")).toHaveCount(0);
+  await expect(page.locator("#intro-heading")).toBeVisible();
+  await expect(page.locator(".entrance-content")).not.toHaveAttribute("inert");
+  await expect(page.locator("main")).toBeFocused();
+  await expect(page).toHaveURL(/\/$/);
+  await page.reload();
+  await expect(page.locator(".homepage-entrance")).toBeVisible();
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await expect(page.locator(".entry-intro")).toHaveAttribute("data-state", "static");
+  await page.getByRole("button", { name: "Enter Noel Biju’s portfolio" }).focus();
+  await page.keyboard.press("Enter");
+  await expect(page.locator("#intro-heading")).toBeVisible();
+  await page.getByRole("navigation", { name: "Main navigation" }).getByRole("link", { name: "About", exact: true }).click();
+  await expect(page).toHaveURL(/\/about$/);
+  await page.getByRole("navigation", { name: "Main navigation" }).getByRole("link", { name: "Home", exact: true }).click();
+  await expect(page.locator(".homepage-entrance")).toBeVisible();
+  expect(errors).toEqual([]);
+});
+
 test("entrance holds indefinitely until deliberately activated", async ({ page, isMobile }) => {
   await page.goto("/enter");
   await expect(page.locator(".entry-intro")).toHaveAttribute("data-chapter", "name", { timeout: 10000 });
@@ -77,6 +123,11 @@ test("direct routes have unique canonicals, visible content, and no browser erro
   for (const path of ["/", "/about", "/projects", "/experience", "/contact", "/projects/pageradar", "/projects/etlab-plus"]) {
     const response = await page.goto(path);
     expect(response?.status(), path).toBe(200);
+    if (path === "/") {
+      await page.emulateMedia({ reducedMotion: "reduce" });
+      await page.getByRole("button", { name: "Enter Noel Biju’s portfolio" }).click();
+      await expect(page.locator(".homepage-entrance")).toHaveCount(0);
+    }
     await expect(page.locator("h1")).toHaveCount(1);
     await expect(page.locator(".entry-intro")).toHaveCount(0);
     const canonical = await page.locator('link[rel="canonical"]').getAttribute("href");
@@ -93,6 +144,9 @@ test("direct routes have unique canonicals, visible content, and no browser erro
 test("content and entrance links work without JavaScript", async ({ browser, baseURL }) => {
   const context = await browser.newContext({ javaScriptEnabled: false, baseURL });
   const page = await context.newPage();
+  await page.goto("/");
+  await expect(page.locator("#intro-heading")).toBeVisible();
+  await expect(page.locator(".homepage-entrance")).not.toBeVisible();
   await page.goto("/projects");
   const total = Number((await page.locator(".library-status [role=status]").innerText()).match(/^\d+/)?.[0]);
   await expect(page.locator(".library-project")).toHaveCount(total);

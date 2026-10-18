@@ -66,9 +66,9 @@ ProjectReadme renders Markdown as semantic HTML with raw HTML disabled and safe 
 
 ## Motion and accessibility
 
-The optional /enter route contains “A line of thought”: a continuous orange stroke draws a hand for Choru Vaari, morphs into PageRadar change marks, then forms Noel Biju. Its sequence takes about four seconds and settles indefinitely. A fresh tap, click, Enter or Space explicitly enters the portfolio; the full surface is a real link, not an invisible div handler. Dragging bends the thread and does not activate navigation. Mouse modifiers retain normal link behavior.
+Every fresh homepage visit opens “A line of thought”: a continuous orange stroke draws a hand for Choru Vaari, morphs into PageRadar change marks, then forms Noel Biju. Its sequence takes about four seconds and settles indefinitely. A fresh tap, click, Enter or Space explicitly enters the portfolio; the homepage uses a full-surface native button to reveal content in place. Background controls stay inert until entry completes, then focus moves into main content. The /enter replay uses a real link with a one-navigation memory handoff to prevent playing twice. Dragging bends the thread and does not activate navigation. Mouse modifiers on the replay link retain normal link behavior.
 
-No timer, session-storage flag, wheel, resize, background tab, history event, failed renderer or motion preference can navigate an untouched entrance. Reduced motion and forced colors use a static drawing and the same deliberate link. Without JavaScript the server-rendered link works. The only navigation timeout is a recovery fallback scheduled **after deliberate activation**. Entrance styles and animation mount only at /enter, which is noindex, follow and omitted from the sitemap. The actual homepage and all content routes remain visible immediately for everyone, including crawlers.
+No timer, session-storage flag, wheel, resize, background tab, history event, failed renderer or motion preference can navigate an untouched entrance. Reduced motion and forced colors use a static drawing with deliberate activation. Without JavaScript, the homepage is directly accessible and the replay link works. The only navigation timeout is a recovery fallback scheduled **after deliberate activation**. The homepage overlay is server-rendered to prevent a portfolio flash before hydration; its content and metadata remain in the initial HTML. No seen flag persists across visits: reloading or returning Home replays the entrance. Other content routes open directly. The /enter route remains noindex, follow and omitted from the sitemap.
 
 Heading reveals are finite, optional enhancements. Reduced motion disables animated reveals, transitions and smooth scrolling. Keyboard focus is visible, never hidden behind the header, and every interactive element is a native link, button, range input, search input, select or disclosure. No-JavaScript visitors retain route links, project stories, contact information and the résumé.
 
@@ -77,6 +77,6 @@ Heading reveals are finite, optional enhancements. Reduced motion disables anima
 - Lead with Noel’s work, role, verified contribution and readable content.
 - Preserve consistent route navigation and useful empty/failure states.
 - Keep public GitHub metadata separate from manually curated personal facts.
-- Keep /enter deliberate and isolated; never restore a global homepage gate.
+- Replay the deliberate homepage entrance on fresh visits and keep other content routes directly accessible.
 - Do not invent project metrics or embed external screenshots as fake product output.
 - Preserve readable layout, reduced motion and keyboard/touch behavior at 320px and above.

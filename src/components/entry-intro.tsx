@@ -1,16 +1,17 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, type MouseEvent, type KeyboardEvent } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { createEntryThread } from "@/lib/entry-thread";
 import { EntryThreadArt } from "@/components/entry-thread-art";
+import { markEntryHandoff } from "@/lib/entry-navigation";
 
 type EntryNote = { thought: string; project: string; symbol: "hand" | "change" };
 const OPEN_DURATION = 1100;
 const TAP_THRESHOLD = 8;
 
-export function EntryIntro({ name, location, notes }: { name: string; location?: string; notes: EntryNote[] }) {
+export function EntryIntro({ name, location, notes, embedded = false, onEntered }: { name: string; location?: string; notes: EntryNote[]; embedded?: boolean; onEntered?: () => void }) {
   const rootRef = useRef<HTMLElement>(null);
   const enterRef = useRef<(detail: number) => void>(() => {});
   const suppressClick = useRef(false);
@@ -18,7 +19,7 @@ export function EntryIntro({ name, location, notes }: { name: string; location?:
 
   useEffect(() => {
     const root = rootRef.current;
-    const surface = root?.querySelector<HTMLAnchorElement>(".entry-surface");
+    const surface = root?.querySelector<HTMLElement>(".entry-surface");
     if (!root || !surface) return;
     const motion = matchMedia("(prefers-reduced-motion: reduce)");
     const colors = matchMedia("(forced-colors: active)");
@@ -47,7 +48,8 @@ export function EntryIntro({ name, location, notes }: { name: string; location?:
       clearTimeout(navigationFallback);
       cancelAnimationFrame(frame);
       // This is reachable only after an explicit link, tap, or keyboard activation.
-      router.push("/");
+      if (onEntered) onEntered();
+      else { markEntryHandoff(); router.push("/"); }
     };
     const open = () => {
       if (opening || navigating) return;
@@ -152,13 +154,27 @@ export function EntryIntro({ name, location, notes }: { name: string; location?:
       enterRef.current = () => {};
       root.dataset.state = "static";
     };
-  }, [router]);
+  }, [router, onEntered]);
+
+  const Name = embedded ? "p" : "h1";
+  const interaction = {
+    className: "entry-surface",
+    "aria-label": `Enter ${name}’s portfolio`,
+    "aria-describedby": "entry-description",
+    onClick: (event: MouseEvent<HTMLElement>) => {
+      if (!embedded && (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey)) return;
+      event.preventDefault(); enterRef.current(event.detail);
+    },
+    onKeyDown: (event: KeyboardEvent<HTMLElement>) => {
+      if (event.key === " ") { event.preventDefault(); enterRef.current(0); }
+    },
+  };
 
   return <section ref={rootRef} className="entry-intro" data-chapter="hand" aria-labelledby="entry-title" aria-describedby="entry-description">
-    <div className="entry-stage" data-chapter="hand"><div className="entry-brand"><h1 id="entry-title">{name}<span aria-hidden="true">.</span></h1><span>Software & AI</span></div>
+    <div className="entry-stage" data-chapter="hand"><div className="entry-brand"><Name id="entry-title">{name}<span aria-hidden="true">.</span></Name><span>Software & AI</span></div>
       <div className="entry-story">{notes.map(note => <div className={`entry-chapter entry-chapter-${note.symbol}`} key={note.symbol}><p className="entry-thought">{note.thought}</p><p className="entry-project">{note.project}</p></div>)}<div className="entry-chapter entry-chapter-name"><p className="entry-thought">Ideas take shape.</p><p className="entry-project">Curiosity → experiments → useful software</p></div></div>
       <div className="entry-footer"><span className="entry-location">{location}</span><p className="entry-hint" id="entry-description"><span className="entry-pointer-copy">Move to bend the line. Click anywhere to enter.</span><span className="entry-touch-copy">Drag to bend the line. Tap anywhere to enter.</span></p><span className="entry-footer-label" aria-hidden="true">A line of thought</span></div>
     </div><EntryThreadArt />
-    <Link className="entry-surface" href="/" aria-label={`Enter ${name}’s portfolio`} aria-describedby="entry-description" onClick={event => { if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return; event.preventDefault(); enterRef.current(event.detail); }} onKeyDown={event => { if (event.key === " ") { event.preventDefault(); enterRef.current(0); } }} />
+    {embedded ? <button {...interaction} onClick={interaction.onClick} type="button" /> : <Link {...interaction} href="/" />}
   </section>;
 }
