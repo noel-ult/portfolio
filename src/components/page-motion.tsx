@@ -1,8 +1,10 @@
 "use client";
 
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 export function PageMotion() {
+  const pathname = usePathname();
   useEffect(() => {
     const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
     const animations = new Set<Animation>();
@@ -26,6 +28,6 @@ export function PageMotion() {
     const change = () => { finish(); observer?.disconnect(); observe(); };
     observe(); preference.addEventListener("change", change);
     return () => { finish(); observer?.disconnect(); preference.removeEventListener("change", change); };
-  }, []);
+  }, [pathname]);
   return null;
 }

@@ -1,44 +1,34 @@
 # Portfolio maintenance guide
 
-A static single-page portfolio built with Next.js App Router, React, TypeScript, and Tailwind CSS. The current source lives under `src/`; earlier multi-page portfolio layouts do not describe this revision.
+Use Node.js 24. Run `npm ci`, `npm run dev`; run `npm run build` then `npm start` for a production server. This revision uses standard Next.js on Vercel with incremental regeneration, not static export.
 
-## Run and validate
+## Source ownership
 
-Use Node.js **24**, matching `.nvmrc` and `package.json`:
+- `src/content/portfolio.ts` owns approved personal facts, selected project stories, résumé/social URLs and immutable GitHub repository IDs for curated work.
+- `src/lib/github.ts` owns server-only GitHub requests, one-hour caching, pagination, complete-result validation and snapshot fallback. `github-model.ts` owns pure validation, eligibility, slug and safe-text/link helpers. `src/content/github-snapshot.json` is the verified public cold-cache fallback.
+- `src/app/(site)` owns crawlable content routes and the shared shell. New GitHub projects render on demand at `/projects/[slug]`; curated stories stay available from local content.
+- `/enter` owns the entrance. Its component never appears on content routes and never navigates without an explicit activation. No sessionStorage gate, global bootstrap, or idle release belongs in the root layout.
+- Shared CSS tokens remain in `src/app/globals.css`; `DESIGN.md` explains the identity and native control decisions.
 
-```sh
-npm ci
-npm run dev
-```
+## GitHub operations
 
-Visit http://localhost:3000. Before shipping content changes:
+The cache refreshes on the next request after one hour, without a deployment or browser polling. Public-only access needs no token. Optional `GITHUB_TOKEN` belongs only on the server in local/Vercel environment settings. Failed fetches throw inside the validated cache operation; they must not overwrite good cached data. The snapshot makes cold-cache failures readable. Do not add personal skill claims, contribution claims, or performance metrics from inference.
 
-```sh
-npm run lint
-npm run typecheck
-npm run build
-npm start
-```
+To update the fallback, fetch all public repository pages, normalize them with `normalizeRepositories`, attach safe `readmeExcerpt` text where available, and record the actual `syncedAt`. Never include credentials, private repositories or full API responses. Runtime discovery does not depend on snapshot updates.
 
-`npm start` previews the exported `out/` directory on port 3000. It is a static preview command, not `next start`.
+## Validation
 
-## Content and structure
+Run `npm test`, lint, a production build, then type checking and `npm run test:e2e`. The browser suite needs Playwright Chromium (`npx playwright install chromium`) and starts the built app on port 3100 unless `PLAYWRIGHT_BASE_URL` is set. Inspect desktop and mobile renderings and verify:
 
-Edit `src/content/portfolio.ts` for profile text, projects, skills, experience, education, achievements, and contacts. `src/components/portfolio.tsx` composes the page; artwork, entry animation, project previews/stories, header, terminal, and console drawer have dedicated components. `src/lib/content.ts`, `site.ts`, and `entry-thread.ts` hold shared content/site/animation support.
+- `/enter` stays on the entrance after 30 seconds, drag, wheel, resize and backgrounding; tap/click/Enter/Space enters once.
+- Reduced motion remains static and actionable; no-JavaScript navigation works.
+- `/`, About, Projects, Experience, Contact and project URLs work directly and through links.
+- Search, language, clear, load-more, URL restoration, native select keyboard behavior, disclosure and both previews work.
+- No console exceptions, horizontal overflow, invalid HTML, incorrect canonicals, broken assets, or accidental overlay/inert content.
+- GitHub unavailable/rate-limited responses retain good data or use the labelled fallback.
 
-Read `PORTFOLIO_REQUIREMENTS.md` and `DESIGN.md` before structural changes; `AGENTS.md` covers framework-specific editing guidance. Image-generation prompt records live under `public/art/` alongside the visual assets. Use the actual licensed assets when publishing.
+## Publishing and Google Search
 
-## Hosting and metadata
+Vercel uses `vercel.json` for headers and legacy redirects. Each page owns its canonical through `pageMetadata`; the root layout must not canonicalize child routes to `/`. Sitemap includes real content, not `/enter`, filter variants, assets or redirects.
 
-`next.config.ts` configures static export. `vercel.json` contains the current Vercel adapter configuration and hostname redirect; keep its `.next` framework-output setting aligned with the existing README rather than substituting the generic static-host output directory. Other static hosts serve `out/`.
-
-The production canonical origin is fixed in `src/lib/site.ts`; robots and sitemap derive from source. No backend, contact-delivery service, database, or runtime secret is required. Editing `.env.example` does not establish an environment-variable contract unless source actually reads it.
-
-## Manual checks
-
-Check entry motion, navigation, project previews, terminal/console controls, contact links, reduced-motion behavior, and narrow-screen layout. There is no automated application test suite in this revision. Verify image paths and metadata after a production build, because a successful development page alone does not exercise static export.
-
-## More documentation
-
-- [Source, command, and configuration reference](REFERENCE.md)
-- [Contributing](../CONTRIBUTING.md)
+After shipping, verify HTTP responses and rendered screenshots before using the signed-in Search Console session to resubmit the sitemap, request indexing of real pages, or restart validation of repaired content URLs. HTTP-to-HTTPS and duplicate canonical exclusions are expected. Font/icon assets do not need page-indexing requests. Google’s reports update after recrawl, not immediately after a deploy.

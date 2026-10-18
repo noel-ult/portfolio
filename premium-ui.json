@@ -1,0 +1,7 @@
+{
+  "profile": "content-site",
+  "sourceRoots": ["src"],
+  "ownership": { "Select/Listbox": "native" },
+  "requiredCommands": ["lint", "typecheck", "test", "build"],
+  "commands": { "lint": "npm run lint", "typecheck": "npm run typecheck", "test": "npm test", "build": "npm run build" }
+}

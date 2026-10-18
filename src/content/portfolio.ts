@@ -1,6 +1,7 @@
 export type PortfolioLink = { label: string; url: string };
 export type Project = {
   id: string;
+  githubRepositoryId?: number;
   title: string;
   summary: string;
   problem?: string;
@@ -85,7 +86,7 @@ export const portfolio: Portfolio = {
   ],
   projects: [
     {
-      id: "pageradar", title: "PageRadar",
+      id: "pageradar", githubRepositoryId: 1374593573, title: "PageRadar",
       entryNote: { thought: "Notice what changes.", label: "PageRadar · Web systems", symbol: "change" },
       summary: "Keep an eye on the pages that matter. PageRadar monitors public webpages and keeps a history of what changed.",
       problem: "Important updates to deadlines, pricing, or eligibility are easy to miss when you have to revisit every page yourself.",
@@ -95,7 +96,7 @@ export const portfolio: Portfolio = {
       preview: "pageradar",
     },
     {
-      id: "choru-vaari", title: "Choru Vaari Kodukkam",
+      id: "choru-vaari", githubRepositoryId: 1366590556, title: "Choru Vaari Kodukkam",
       entryNote: { thought: "Start with a small question.", label: "Choru Vaari · Computer vision", symbol: "hand" },
       summary: "How many handfuls of rice are on your plate? A playful computer vision project gives a very serious answer to a very unserious question.",
       contribution: "Hand tracking, vaari estimation, and frontend. Built with Samuel Thomas C for TinkerHub Useless Projects.",
@@ -107,14 +108,14 @@ export const portfolio: Portfolio = {
       preview: "choru-vaari",
     },
     {
-      id: "ai-study-coach", title: "AI Study Coach",
+      id: "ai-study-coach", githubRepositoryId: 1172669852, title: "AI Study Coach",
       summary: "A study companion that turns session logs into personalized recommendations and a clearer picture of productivity.",
       approach: "Tracks study duration, focus, and difficulty through a Flask API and an Expo mobile interface. Rule-based analysis produces suggestions, while dashboards show study patterns over time.",
       technologies: ["Python", "Flask", "React Native", "Expo", "SQLite"],
       links: [{ label: "View source on GitHub", url: "https://github.com/noel-ult/AI-Study-Coach-" }],
     },
     {
-      id: "local-ai-assistant", title: "Local AI Assistant",
+      id: "local-ai-assistant", githubRepositoryId: 1200996701, title: "Local AI Assistant",
       summary: "An offline assistant built around locally running language models, persistent conversation memory, and multiple chat sessions.",
       approach: "Uses Ollama to run models locally, with separate modules for the AI engine, conversation management, and memory. The project explores LLaMA and Mistral without depending on a cloud chat service.",
       technologies: ["Python", "Ollama", "LLaMA", "Mistral"],
