@@ -13,11 +13,13 @@ type IntroProps = {
 
 export function HomeEntrance({ children, ...intro }: IntroProps & { children: React.ReactNode }) {
   const pathname = usePathname();
-  return <EntranceFrame key={pathname} enabled={pathname === "/"} intro={intro}>{children}</EntranceFrame>;
+  return <EntranceFrame enabled={pathname === "/"} intro={intro}>{children}</EntranceFrame>;
 }
 
 function EntranceFrame({ children, enabled, intro }: { children: React.ReactNode; enabled: boolean; intro: IntroProps }) {
-  const [entered, setEntered] = useState(() => enabled && hasEntryHandoff());
+  // Keep this state across client-side routes. A direct inner-page visit also
+  // counts as entering the site; only a fresh homepage load starts the intro.
+  const [entered, setEntered] = useState(() => !enabled || hasEntryHandoff());
   const contentRef = useRef<HTMLDivElement>(null);
   const active = enabled && !entered;
 

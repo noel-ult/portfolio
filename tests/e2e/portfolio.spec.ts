@@ -42,6 +42,40 @@ test("homepage entrance waits for activation, reveals in place and replays on a 
   await page.getByRole("navigation", { name: "Main navigation" }).getByRole("link", { name: "About", exact: true }).click();
   await expect(page).toHaveURL(/\/about$/);
   await page.getByRole("navigation", { name: "Main navigation" }).getByRole("link", { name: "Home", exact: true }).click();
+  await expect(page.locator("#intro-heading")).toBeVisible();
+  await expect(page.locator(".homepage-entrance")).toHaveCount(0);
+  expect(errors).toEqual([]);
+});
+
+test("internal Home and name links never replay the entrance, including direct inner-page arrivals", async ({ page }) => {
+  const errors: string[] = [];
+  page.on("pageerror", error => errors.push(error.message));
+  await page.goto("/about");
+  const navigation = page.getByRole("navigation", { name: "Main navigation" });
+  const expectHome = async () => {
+    await expect(page).toHaveURL(/\/$/);
+    await expect(page.locator("#intro-heading")).toBeVisible();
+    await expect(page.locator(".homepage-entrance")).toHaveCount(0);
+    await expect(page.locator(".entrance-content")).not.toHaveAttribute("inert");
+  };
+  await page.getByRole("link", { name: "Noel Biju, home", exact: true }).click();
+  await expectHome();
+  for (const label of ["Projects", "About", "Experience", "Contact"]) {
+    await navigation.getByRole("link", { name: label, exact: true }).click();
+    await expect(page.locator("h1")).toBeVisible();
+    await navigation.getByRole("link", { name: "Home", exact: true }).click();
+    await expectHome();
+    await navigation.getByRole("link", { name: label, exact: true }).click();
+    await page.getByRole("link", { name: "Noel Biju, home", exact: true }).click();
+    await expectHome();
+  }
+  await page.goBack();
+  await expect(page).toHaveURL(/\/contact$/);
+  await page.goForward();
+  await expectHome();
+  await page.getByRole("link", { name: "Noel Biju, home", exact: true }).click();
+  await expectHome();
+  await page.reload();
   await expect(page.locator(".homepage-entrance")).toBeVisible();
   expect(errors).toEqual([]);
 });
