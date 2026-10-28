@@ -59,3 +59,7 @@ Tests cover repository eligibility and sorting, pagination and failures, README 
 The interactive project previews use sample data and local calculation controls; they do not monitor sites or access a camera. Photo and résumé were supplied by Noel. Locally bundled fonts and existing artwork preserve the established identity. `DESIGN.md` records the shared visual and navigation contract.
 
 More details: [Maintenance guide](docs/PROJECT_GUIDE.md), [Source reference](docs/REFERENCE.md), and [Contributing](CONTRIBUTING.md).
+
+<!-- developer-handbook-20261028 -->
+[Developer guide](docs/PROJECT_GUIDE.md) · [Source reference](docs/REFERENCE.md) · [Verification and operations](docs/OPERATIONS.md)
+<!-- /developer-handbook-20261028 -->
